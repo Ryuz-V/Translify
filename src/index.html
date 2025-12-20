@@ -1,28 +1,66 @@
 <!doctype html>
 <html>
 <head>
-    <meta lang="eng">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="./output.css" rel="stylesheet">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Font -->
-<link href="https://fonts.googleapis.com/css2?family=Cantarell:ital,wght@0,400;0,700;1,400;1,700&family=Caveat:wght@400..700&family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+    <meta lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="./output.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 </head>
 <body class="font-sans" style="font-family: 'Roboto', sans-serif;"> 
 <!-- header -->
 <header class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24">
-    <nav>
-        <div class="container mx-auto flex justify-between items-center py-4">
-            <!-- logo -->
-            <div class="text-2xl font-bold">
-                <img src="/asset/icons8-translate-100.png" alt="logo">
-                <a href="#">Translify</a>
+    <nav class="h-16 md:h-20">
+        <div class="container mx-auto h-full flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="/asset/icons8-translate-100.png" alt="logo" 
+                     class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                <a href="#" class="text-2xl md:text-3xl font-bold text-gray-800 hover:text-blue-600 transition-colors">
+                    Translify
+                </a>
             </div>
-            <!-- navigation links -->
-            <ul class="flex space x-6">
-                <img src="/asset/icons8-settings-64.png" alt="settings">
+            <ul class="flex items-center space-x-4 md:space-x-6">
+                <!-- Settings icon -->
+                <li class="hidden sm:block">
+                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" 
+                       title="Settings">
+                        <img src="/asset/icons8-settings-64.png" alt="settings" 
+                             class="w-6 h-6 md:w-7 md:h-7">
+                    </a>
+                </li>
+                <!-- Idea icon -->
+                <li class="hidden sm:block">
+                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors"
+                       title="Ideas">
+                        <img src="/asset/icons8-idea-100.png" alt="idea" 
+                             class="w-6 h-6 md:w-7 md:h-7">
+                    </a>
+                </li>
+                <!-- Question icon -->
+                <li class="hidden sm:block">
+                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors"
+                       title="Help">
+                        <img src="/asset/icons8-question-100.png" alt="question" 
+                             class="w-6 h-6 md:w-7 md:h-7">
+                    </a>
+                </li>
+                <!-- Mobile menu icon (hamburger) untuk tampilan kecil -->
+                <li class="sm:hidden">
+                    <button class="p-2 hover:bg-gray-100 rounded-full">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </li>
+                <!-- Login button -->
+                <li>
+                    <a href="#" class="bg-black text-white px-6 py-2.5 rounded-lg hover:bg-gray-800 
+                                      transition-colors font-medium flex items-center space-x-2">
+                        <i class="fas fa-sign-in-alt"></i>
+                        <span>Masuk</span>
+                    </a>
+                </li>
             </ul>
         </div>
     </nav>
