@@ -71,157 +71,114 @@
 <!-- nanti tempat berkas dan gambar -->
 
 <!-- main content -->
-<main class="max-w-7xl mx-auto px-4 py-8">
-        <section class="space-y-8">
-            <!-- Language Selection -->
-            <div class="bg-white rounded-xl shadow-lg p-6">
-                <div class="flex flex-col md:flex-row md:items-center justify-between space-y-4 md:space-y-0">
-                    <div class="flex-1">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-globe-americas mr-2 text-primary-600"></i>
-                            Bahasa Sumber
-                        </label>
-                        <div class="relative">
-                            <select id="sourceLang" class="language-select w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-gray-800">
-                                <option value="id">Indonesia</option>
+<main class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-8">
+    <section class="max-w-6xl mx-auto">
+        <!-- Translation Container -->
+        <div class="bg-white rounded-2xl shadow-lg p-4 md:p-6">
+            <!-- Language Selection Box - Gabung seperti di gambar -->
+            <div class="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-200">
+                <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
+                    <!-- From Language -->
+                    <div class="w-full md:w-auto">
+                        <div class="relative inline-block">
+                            <select class="p-3 pr-10 border border-gray-300 rounded-lg appearance-none 
+                                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                                         bg-white cursor-pointer min-w-[180px] md:min-w-[200px]">
+                                <option value="auto" selected>Deteksi bahasa</option>
                                 <option value="en">English</option>
-                                <option value="es">Español (Spanyol)</option>
-                                <option value="fr">Français (Prancis)</option>
-                                <option value="de">Deutsch (Jerman)</option>
-                                <option value="ja">日本語 (Jepang)</option>
-                                <option value="zh">中文 (Mandarin)</option>
-                                <option value="ar">العربية (Arab)</option>
+                                <option value="id">Indonesia</option>
+                                <option value="es">Español</option>
+                                <option value="fr">Français</option>
+                                <option value="de">Deutsch</option>
+                                <option value="ja">日本語</option>
+                                <option value="ko">한국어</option>
+                                <option value="zh">中文</option>
+                                <option value="ar">العربية</option>
                             </select>
                             <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                <i class="fas fa-chevron-down text-gray-500"></i>
+                                <i class="fas fa-chevron-down text-gray-400"></i>
                             </div>
                         </div>
                     </div>
-                    
+
+                    <!-- Swap Button -->
                     <div class="flex items-center justify-center">
-                        <button id="swapLanguages" class="p-3 bg-primary-100 hover:bg-primary-200 rounded-full btn-transition">
-                            <i class="fas fa-exchange-alt text-primary-700 text-xl"></i>
+                        <button class="p-3 bg-white hover:bg-gray-50 rounded-full transition-colors "
+                                title="Tukar bahasa">
+                            <i class="fas fa-exchange-alt text-gray-700"></i>
                         </button>
                     </div>
-                    
-                    <div class="flex-1">
-                        <label class="block text-sm font-medium text-gray-700 mb-2">
-                            <i class="fas fa-flag mr-2 text-primary-600"></i>
-                            Bahasa Target
-                        </label>
-                        <div class="relative">
-                            <select id="targetLang" class="language-select w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500 bg-white text-gray-800">
+
+                    <!-- To Language -->
+                    <div class="w-full md:w-auto">
+                        <div class="relative inline-block">
+                            <select class="p-3 pr-10 border border-gray-300 rounded-lg appearance-none 
+                                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                                         bg-white cursor-pointer min-w-[180px] md:min-w-[200px]">
+                                <option value="de">Jerman</option>
                                 <option value="en">English</option>
                                 <option value="id">Indonesia</option>
-                                <option value="es">Español (Spanyol)</option>
-                                <option value="fr">Français (Prancis)</option>
-                                <option value="de">Deutsch (Jerman)</option>
-                                <option value="ja">日本語 (Jepang)</option>
-                                <option value="zh">中文 (Mandarin)</option>
-                                <option value="ar">العربية (Arab)</option>
+                                <option value="es">Español</option>
+                                <option value="fr">Français</option>
+                                <option value="ja">日本語</option>
+                                <option value="ko">한국어</option>
+                                <option value="zh">中文</option>
+                                <option value="ar">العربية</option>
                             </select>
                             <div class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                <i class="fas fa-chevron-down text-gray-500"></i>
+                                <i class="fas fa-chevron-down text-gray-400"></i>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Translation Area -->
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <!-- Source Text Box -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col h-full">
-                    <div class="bg-primary-600 px-6 py-4">
-                        <div class="flex justify-between items-center">
-                            <h2 class="text-xl font-semibold text-white">
-                                <i class="fas fa-keyboard mr-2"></i>
-                                Teks Asli
-                            </h2>
-                            <div class="flex items-center space-x-2">
-                                <span id="sourceCharCount" class="text-primary-100 text-sm font-medium">0 karakter</span>
-                                <button id="clearSource" class="text-white hover:text-primary-200 btn-transition">
-                                    <i class="fas fa-trash-alt"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex-1 p-1">
+
+            <!-- Text Areas Row -->
+            <div class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
+                <!-- Input Text Area -->
+                <div class="flex-1">
+                    <div class="relative h-64 md:h-80">
                         <textarea 
-                            id="sourceText" 
-                            class="translation-textarea w-full h-full min-h-[300px] p-5 text-gray-800 focus:outline-none resize-none"
-                            placeholder="Ketik atau tempel teks yang ingin Anda terjemahkan di sini..."
+                            id="input-text"
+                            class="w-full h-full p-4 border border-gray-300 rounded-xl 
+                                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                                   resize-none text-lg"
+                            placeholder="Ketik teks di sini..."
+                            rows="8"
                         ></textarea>
                     </div>
-                    
-                    <div class="px-6 py-4 border-t border-gray-100">
-                        <div class="flex flex-wrap gap-2">
-                            <button id="pasteText" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg btn-transition flex items-center">
-                                <i class="fas fa-paste mr-2"></i>
-                                Tempel
-                            </button>
-                            <button id="speakSource" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg btn-transition flex items-center">
-                                <i class="fas fa-volume-up mr-2"></i>
-                                Dengarkan
-                            </button>
-                            <button id="sampleText" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg btn-transition flex items-center">
-                                <i class="fas fa-file-alt mr-2"></i>
-                                Contoh Teks
-                            </button>
-                        </div>
-                    </div>
                 </div>
-                
-                <!-- Translated Text Box -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden flex flex-col h-full">
-                    <div class="bg-green-600 px-6 py-4">
-                        <div class="flex justify-between items-center">
-                            <h2 class="text-xl font-semibold text-white">
-                                <i class="fas fa-language mr-2"></i>
-                                Hasil Terjemahan
-                            </h2>
-                            <div class="flex items-center space-x-2">
-                                <span id="translatedCharCount" class="text-green-100 text-sm font-medium">0 karakter</span>
-                                <button id="copyTranslation" class="text-white hover:text-green-200 btn-transition">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="flex-1 p-1">
-                        <div id="translationResult" class="translation-textarea w-full h-full min-h-[300px] p-5 text-gray-800 overflow-y-auto">
-                            <div class="flex items-center justify-center h-full">
-                                <div class="text-center text-gray-500">
-                                    <i class="fas fa-language text-4xl mb-4"></i>
-                                    <p>Hasil terjemahan akan muncul di sini</p>
-                                    <p class="text-sm mt-2">Klik tombol "Terjemahkan" untuk memulai</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="px-6 py-4 border-t border-gray-100">
-                        <div class="flex flex-wrap gap-2">
-                            <button id="speakTranslation" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg btn-transition flex items-center">
-                                <i class="fas fa-volume-up mr-2"></i>
-                                Dengarkan
-                            </button>
-                            <button id="saveTranslation" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg btn-transition flex items-center">
-                                <i class="fas fa-save mr-2"></i>
-                                Simpan
-                            </button>
-                            <button id="shareTranslation" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg btn-transition flex items-center">
-                                <i class="fas fa-share-alt mr-2"></i>
-                                Bagikan
-                            </button>
-                        </div>
+
+                <!-- Output Text Area -->
+                <div class="flex-1">
+                    <div class="relative h-64 md:h-80">
+                        <textarea 
+                            id="output-text"
+                            class="w-full h-full p-4 border border-gray-300 rounded-xl 
+                                   bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 
+                                   focus:border-transparent resize-none text-lg"
+                            placeholder="Terjemahan akan muncul di sini..."
+                            rows="8"
+                            readonly
+                        ></textarea>
                     </div>
                 </div>
             </div>
-        </section>
-    </main>
+
+            <!-- Translate Button -->
+            <div class="mt-8 flex justify-center">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg 
+                              font-medium transition-colors flex items-center space-x-2 shadow-md">
+                    <i class="fas fa-language"></i>
+                    <span>Terjemahkan</span>
+                </button>
+            </div>
+        </div>
+    </section>
+</main>
+
+
 <script src="https://kit.fontawesome.com/5ea0eadb61.js" crossorigin="anonymous"></script>
+<script src="/src/index.js"></script>
 </body>
 </html>
