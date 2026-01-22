@@ -68,20 +68,18 @@
     </nav>
 </header>
 
-<!-- nanti tempat berkas dan gambar -->
-
 <!-- main content -->
-<main class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-8 border-t border-gray-200 min-h-screen bg-gray-100"> <!-- border-t border-gray-200 min-h-screen bg-gray-100 -->
+<main class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-8 border-t border-gray-200 min-h-screen">
     <section class="max-w-6xl mx-auto">
         <!-- Translation Container -->
-        <div class="bg-white rounded-lg shadow-lg p-4 md:p-6 border border-gray-200">
-            <!-- Language Selection Box - Gabung seperti di gambar -->
-            <div class="bg-gray-50 rounded-xl p-4 mb-6 border border-gray-200">
+        <div class="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+            <!-- Language Selection Box -->
+            <div class="border border-gray-200 p-2 md:p-6">
                 <div class="flex flex-col md:flex-row items-center justify-center space-y-4 md:space-y-0 md:space-x-4">
                     <!-- From Language -->
-                    <div class="w-full md:w-auto">
+                    <div class="w-full md:w-auto ">
                         <div class="relative inline-block">
-                            <select class="p-3 pr-10  rounded-lg appearance-none 
+                            <select class="p-3 pr-10 rounded-lg appearance-none  bg-white
                                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
                                         cursor-pointer min-w-[180px] md:min-w-[200px]">
                                 <option value="auto" selected>Deteksi bahasa</option>
@@ -100,7 +98,7 @@
 
                     <!-- Swap Button -->
                     <div class="flex items-center justify-center">
-                        <button class="p-3 hover:bg-gray-50 rounded-full transition-colors "
+                        <button class="p-3 hover:bg-gray-50 rounded-full transition-colors bg-white"
                                 title="Tukar bahasa">
                             <i class="fas fa-exchange-alt text-gray-700"></i>
                         </button>
@@ -109,7 +107,7 @@
                     <!-- To Language -->
                     <div class="w-full md:w-auto">
                         <div class="relative inline-block">
-                            <select class="p-3 pr-10 rounded-lg appearance-none 
+                            <select class="p-3 pr-10 rounded-lg appearance-none bg-white
                                         focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
                                         cursor-pointer min-w-[180px] md:min-w-[200px]">
                                 <option value="en">English</option>
@@ -128,48 +126,46 @@
             </div>
 
             <!-- Text Areas Row -->
-            <div class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-6">
+            <div class="flex flex-col md:flex-row">
                 <!-- Input Text Area -->
-                <div class="flex-1">
-                    <div class="relative h-64 md:h-80">
+                <div class="flex-1 border border-gray-200">
+                    <div class="h-96 md:h-[32rem]">
                         <textarea 
                             id="input-text"
-                            class="w-full h-full p-4 border border-gray-300 rounded-xl 
-                                   focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
-                                   resize-none text-lg"
+                            class="w-full h-full p-4 focus:outline-none focus:ring-0
+                                   resize-none text-lg border-0"
                             placeholder="Ketik teks di sini..."
-                            rows="8"
+                            rows="10"
                         ></textarea>
                     </div>
                 </div>
 
                 <!-- Output Text Area -->
-                <div class="flex-1">
-                    <div class="relative h-64 md:h-80">
+                <div class="flex-1 border border-gray-200">
+                    <div class="h-96 md:h-[32rem]">
                         <textarea 
                             id="output-text"
-                            class="w-full h-full p-4 border border-gray-300 rounded-xl 
-                                   bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 
-                                   focus:border-transparent resize-none text-lg"
+                            class="w-full h-full p-4 focus:outline-none focus:ring-0
+                                   resize-none text-lg border-0"
                             placeholder="Terjemahan akan muncul di sini..."
-                            rows="8"
+                            rows="10"
                             readonly
                         ></textarea>
                     </div>
                 </div>
             </div>
         </div>
-                    <!-- Translate Button -->
-            <div class="mt-8 flex justify-center">
-                <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg 
-                              font-medium transition-colors flex items-center space-x-2 shadow-md">
-                    <i class="fas fa-language"></i>
-                    <span>Terjemahkan</span>
-                </button>
-            </div>
+        
+        <!-- Translate Button -->
+        <div class="mt-8 flex justify-center">
+            <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg 
+                          font-medium transition-colors flex items-center space-x-2 shadow-md">
+                <i class="fas fa-language"></i>
+                <span>Terjemahkan</span>
+            </button>
+        </div>
     </section>
 </main>
-
 
 <script src="https://kit.fontawesome.com/5ea0eadb61.js" crossorigin="anonymous"></script>
 <script src="/src/index.js"></script>
