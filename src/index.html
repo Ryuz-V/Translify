@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <meta lang="en">
+    <meta lang="id">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Translify</title>
@@ -48,31 +48,27 @@
     100% { transform: rotate(360deg); }
 }
 
-/* Container Title */
 .title {
-    margin-bottom: 20px; /* Jarak antara title dan content */
+    margin-bottom: 20px;
 }
 
-/* Styling Judul */
 .txt_title {
     font-size: 16px;
     font-weight: 500;
 }
 
-/* Container Content */
 .content_kamus {
-    margin-top: 5px; /* Jarak dari title */
+    margin-top: 5px;
 }
 
-/* Paragraf Content */
 .main_content {
-    margin-top: 5px; /* Tambahan jarak dalam content */
+    margin-top: 5px; 
     font-size: 16px;
     color: #555;
 }
 
 .container_kamus {
-    padding: 20px; /* Padding untuk keseluruhan container */
+    padding: 20px; 
 }
 
     </style>
@@ -125,7 +121,7 @@
 <main class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-8 border-t border-gray-200 min-h-screen">
     <section class="max-w-7xl mx-auto">
         <!-- Translation Container -->
-        <div class="bg-white rounded-lg shadow-lg border border-gray-200">
+        <div class="bg-white shadow-lg border border-gray-200">
             <!-- Language Selection Box -->
             <div class="border border-gray-200 p-3 md:p-4">
                 <div class="flex items-center justify-center space-x-4">
@@ -157,12 +153,11 @@
                     </div>
                 </div>
             </div>
-
             <!-- Text Areas Row -->
             <div class="flex flex-col md:flex-row">
                 <!-- Input Text Area -->
                 <div class="flex-1 border border-gray-200">
-                    <div class="h-72 md:h-[28rem]">
+                    <div class="h-80 md:h-[26rem]">
                         <textarea 
                             id="input-text"
                             class="w-full h-full p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
@@ -173,7 +168,7 @@
 
                 <!-- Output Text Area -->
                 <div class="flex-1 border border-gray-200">
-                    <div class="h-72 md:h-[28rem]">
+                    <div class="h-80 md:h-[26rem]">
                         <textarea 
                             id="output-text"
                             class="w-full h-full p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
@@ -194,13 +189,12 @@
     </section>
 
 <!-- kamus -->
-<section class="max-w-7xl mx-auto mt-12 md:mt-16">
-    <div class="container_kamus bg-white rounded-lg shadow-lg border border-gray-200 px-4 pt-10">
+<section class="max-w-7xl mx-auto mt-4 md:mt-2">
+    <div class="container_kamus bg-white shadow-lg border border-gray-200 px-4 pt-10">
         <!-- Header Kamus -->
         <div class="title">
             <h2 class="txt_title">Kamus</h2>
         </div>
-        
         <!-- Konten Kamus -->
         <div class="content_kamus">
             <p class="main_content">
