@@ -11,8 +11,73 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Font -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+      .dropdown-btn {
+        width: 8rem;     
+        max-width: 12rem;     
+      }
+
+      @media (min-width: 768px) {
+        .dropdown-btn {
+          width: 10rem;       
+        }
+      }
+      .truncate-ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+.custom-list::-webkit-scrollbar { height: 6px; width: 6px; }
+
+#translationStatus {
+    transition: opacity 0.3s ease;
+}
+
+#translationStatus.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Container Title */
+.title {
+    margin-bottom: 20px; /* Jarak antara title dan content */
+}
+
+/* Styling Judul */
+.txt_title {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+/* Container Content */
+.content_kamus {
+    margin-top: 5px; /* Jarak dari title */
+}
+
+/* Paragraf Content */
+.main_content {
+    margin-top: 5px; /* Tambahan jarak dalam content */
+    font-size: 16px;
+    color: #555;
+}
+
+.container_kamus {
+    padding: 20px; /* Padding untuk keseluruhan container */
+}
+
+    </style>
 </head>
-<body class="font-sans" style="font-family: 'Roboto', sans-serif;"> 
+<body class="font-sans" style="font-family: 'Roboto', sans-serif;">
 <!-- header -->
 <header class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24">
     <nav class="h-16 md:h-20">
@@ -25,40 +90,28 @@
                 </a>
             </div>
             <ul class="flex items-center space-x-4 md:space-x-5">
-                <!-- Settings icon -->
                 <li class="hidden sm:block">
-                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" 
-                       title="Settings">
-                        <img src="/asset/icons8-settings-64.png" alt="settings" 
-                             class="w-6 h-6 md:w-7 md:h-7">
+                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" title="Settings">
+                        <img src="/asset/icons8-settings-64.png" alt="settings" class="w-6 h-6 md:w-7 md:h-7">
                     </a>
                 </li>
-                <!-- Idea icon -->
                 <li class="hidden sm:block">
-                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors"
-                       title="Ideas">
-                        <img src="/asset/icons8-idea-100.png" alt="idea" 
-                             class="w-6 h-6 md:w-7 md:h-7">
+                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" title="Ideas">
+                        <img src="/asset/icons8-idea-100.png" alt="idea" class="w-6 h-6 md:w-7 md:h-7">
                     </a>
                 </li>
-                <!-- Question icon -->
                 <li class="hidden sm:block">
-                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors"
-                       title="Help">
-                        <img src="/asset/icons8-question-100.png" alt="question" 
-                             class="w-6 h-6 md:w-7 md:h-7">
+                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" title="Help">
+                        <img src="/asset/icons8-question-100.png" alt="question" class="w-6 h-6 md:w-7 md:h-7">
                     </a>
                 </li>
-                <!-- Mobile menu icon (hamburger) untuk tampilan kecil -->
                 <li class="sm:hidden">
                     <button class="p-2 hover:bg-gray-100 rounded-full">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
                 </li>
-                <!-- Login button -->
                 <li>
-                    <a href="#" class="bg-black text-white px-6 py-2.5 rounded-lg hover:bg-gray-800 
-                                      transition-colors font-medium flex items-center space-x-2">
+                    <a href="#" class="bg-black text-white px-6 py-2.5 rounded-lg hover:bg-gray-800 transition-colors font-medium flex items-center space-x-2">
                         <i class="fas fa-sign-in-alt"></i>
                         <span>Masuk</span>
                     </a>
@@ -72,50 +125,49 @@
 <main class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-8 border-t border-gray-200 min-h-screen">
     <section class="max-w-7xl mx-auto">
         <!-- Translation Container -->
-        <div class="bg-white rounded-lg shadow-lg border border-gray-200 overflow-hidden">
+        <div class="bg-white rounded-lg shadow-lg border border-gray-200">
             <!-- Language Selection Box -->
             <div class="border border-gray-200 p-3 md:p-4">
                 <div class="flex items-center justify-center space-x-4">
-                    <!-- From Language -->
-                    <div class="relative inline-block">
-                        <select class="p-2.5 pr-2 rounded-lg appearance-none bg-white
-                                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
-                                    cursor-pointer min-w-[200px] md:min-w-[220px]">
-                            <option value="id" selected>Indonesia</option>
-                        </select>
+                    <!-- From Language (custom) -->
+                    <div class="relative">
+                        <div class="relative w-32 md:w-40">
+                          <button id="fromBtn" type="button" class="dropdown-btn p-2 pr-8 rounded-lg bg-white border text-sm text-left truncate truncate-ellipsis">
+                            Indonesia
+                          </button>
+                          <ul id="fromList" class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list"></ul>
+                        </div>
                     </div>
 
                     <!-- Swap Button -->
                     <div class="flex items-center justify-center">
-                        <button class="p-2 hover:bg-gray-50 rounded-full transition-colors bg-white"
-                                title="Tukar bahasa">
+                        <button id="swapBtn" class="p-2 hover:bg-gray-50 rounded-full transition-colors bg-white" title="Tukar bahasa">
                             <i class="fas fa-exchange-alt text-gray-700"></i>
                         </button>
                     </div>
 
-                    <!-- To Language -->
-                    <div class="relative inline-block">
-                        <select class="p-2.5 pr-2 rounded-lg appearance-none bg-white
-                                    focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent 
-                                    cursor-pointer min-w-[200px] md:min-w-[220px]">
-                            <option value="en">English</option>
-                        </select>
+                    <!-- To Language (custom) -->
+                    <div class="relative">
+                        <div class="relative w-32 md:w-40">
+                          <button id="toBtn" type="button" class="dropdown-btn p-2 pr-8 rounded-lg bg-white border text-sm text-left truncate truncate-ellipsis">
+                            English
+                          </button>
+                          <ul id="toList" class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list"></ul>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Text Areas Row - TINGGI DITAMBAH SEDIKIT -->
+            <!-- Text Areas Row -->
             <div class="flex flex-col md:flex-row">
                 <!-- Input Text Area -->
                 <div class="flex-1 border border-gray-200">
                     <div class="h-72 md:h-[28rem]">
                         <textarea 
                             id="input-text"
-                            class="w-full h-full p-4 focus:outline-none focus:ring-0
-                                   resize-none text-lg border-0"
+                            class="w-full h-full p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
                             placeholder="Ketik teks di sini..."
-                            rows="10"
-                        ></textarea>
+                            rows="10"></textarea>
                     </div>
                 </div>
 
@@ -124,32 +176,41 @@
                     <div class="h-72 md:h-[28rem]">
                         <textarea 
                             id="output-text"
-                            class="w-full h-full p-4 focus:outline-none focus:ring-0
-                                   resize-none text-lg border-0"
-                            placeholder="Terjemahan akan muncul di sini..."
+                            class="w-full h-full p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
                             rows="10"
-                            readonly
-                        ></textarea>
+                            readonly></textarea>
                     </div>
                 </div>
             </div>
         </div>
         
         <!-- Translate Button -->
-        <div class="mt-8 flex justify-center">
-            <button class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg 
-                          font-medium transition-colors flex items-center space-x-2 shadow-md">
-                <i class="fas fa-language"></i>
-                <span>Terjemahkan</span>
-            </button>
+<div class="flex justify-center">
+    <div id="translationStatus" class="text-gray-500 text-sm hidden">
+        <i class="fas fa-spinner fa-spin"></i>
+        <span>Menerjemahkan...</span>
+    </div>
+</div>
+    </section>
+
+<!-- kamus -->
+<section class="max-w-7xl mx-auto mt-12 md:mt-16">
+    <div class="container_kamus bg-white rounded-lg shadow-lg border border-gray-200 px-4 pt-10">
+        <!-- Header Kamus -->
+        <div class="title">
+            <h2 class="txt_title">Kamus</h2>
         </div>
-    </section>
-
-    <!-- Dictionary -->
-    <section>
-
-    </section>
+        
+        <!-- Konten Kamus -->
+        <div class="content_kamus">
+            <p class="main_content">
+                Kamus tidak tersedia untuk pasangan bahasa ini.
+            </p>
+        </div>
+    </div>
+</section>
 </main>
+
 
 <script src="https://kit.fontawesome.com/5ea0eadb61.js" crossorigin="anonymous"></script>
 <script src="/src/index.js"></script>
