@@ -1,0 +1,271 @@
+body {
+        overflow-x: hidden;
+}
+
+.dropdown-btn {
+        width: 8rem;     
+        max-width: 12rem;     
+      }
+
+      @media (min-width: 768px) {
+        .dropdown-btn {
+          width: 10rem;       
+        }
+      }
+      .truncate-ellipsis {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+.custom-list::-webkit-scrollbar { height: 6px; width: 6px; }
+
+#translationStatus {
+    transition: opacity 0.3s ease;
+}
+
+#translationStatus.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.txt_title {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.content_kamus {
+    margin-top: 5px;
+}
+
+.main_content {
+    margin-top: 5px; 
+    font-size: 16px;
+    color: #555;
+}
+
+.container_kamus {
+    padding: 20px; 
+}
+
+/* ===== BRAND SECTION IMPROVED - FULL WIDTH ===== */
+.brand-section {
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
+    padding: 3rem 0;
+    overflow-x: hidden;
+    overflow-y: visible;
+    margin-top: -2rem;
+}
+
+.brand-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.brand-title {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: #1a1e24;
+    margin-bottom: 3rem;
+    position: relative;
+    letter-spacing: -0.02em;
+    padding: 0 2rem;
+    max-width: 1280px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.brand-title::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: black;
+    border-radius: 3px;
+}
+
+.brand-slider-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.brand-slider {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    padding: 0.75rem 0;
+}
+
+/* Gradient overlay - FULL WIDTH */
+.brand-slider::before,
+.brand-slider::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    width: 200px;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.brand-slider::before {
+    left: 0;
+    background: linear-gradient(to right, #f8faff, rgba(248, 250, 255, 0));
+}
+
+.brand-slider::after {
+    right: 0;
+    background: linear-gradient(to left, #f8faff, rgba(248, 250, 255, 0));
+}
+
+/* Brand tracks */
+.brand-track,
+.brand-track-2,
+.brand-track-3 {
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    padding: 0 0px;
+}
+
+.brand-track {
+    animation: scrollLeft 50s linear infinite;
+}
+
+.brand-track-2 {
+    animation: scrollRight 55s linear infinite;
+}
+
+.brand-track-3 {
+    animation: scrollLeft 60s linear infinite;
+}
+
+/* Brand images - FULL WIDTH dengan margin lebih besar */
+.brand-track img,
+.brand-track-2 img,
+.brand-track-3 img {
+    height: 45px;
+    width: auto;
+    margin: 0 60px;
+    filter: grayscale(100%) brightness(1.1);
+    opacity: 0.6;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    object-fit: contain;
+}
+
+/* Hover effects */
+.brand-track img:hover,
+.brand-track-2 img:hover,
+.brand-track-3 img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+    transform: scale(1.2);
+}
+
+/* Animations */
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes scrollRight {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Different animation speeds for variety */
+.brand-slider:nth-child(1) .brand-track {
+    animation-duration: 55s;
+}
+
+.brand-slider:nth-child(2) .brand-track-2 {
+    animation-duration: 60s;
+}
+
+.brand-slider:nth-child(3) .brand-track-3 {
+    animation-duration: 65s;
+}
+
+/* Pause animation on hover */
+.brand-slider:hover .brand-track,
+.brand-slider:hover .brand-track-2,
+.brand-slider:hover .brand-track-3 {
+    animation-play-state: paused;
+}
+
+/* style.css - tambahkan ini */
+
+/* About Section Fix */
+section.w-full.bg-\[\#1B3BB2\] {
+    width: 100vw !important;
+    margin-left: calc(-50vw + 50%) !important;
+    margin-right: calc(-50vw + 50%) !important;
+    position: relative !important;
+    left: 50% !important;
+    right: 50% !important;
+}
+
+/* Video Container */
+.aspect-video {
+    aspect-ratio: 16 / 9;
+}
+
+/* Play Button Animation */
+.hover\:scale-110:hover {
+    transform: scale(1.1);
+}
+
+/* Smooth Transitions */
+.group:hover .group-hover\:translate-x-1 {
+    transform: translateX(0.25rem);
+}
+
+.transition-transform {
+    transition-property: transform;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 300ms;
+}
+
+/* Backdrop Blur for Safari */
+.backdrop-blur-sm {
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.kamus {
+    margin-top: -1px;
+}
