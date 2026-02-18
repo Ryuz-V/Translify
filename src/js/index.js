@@ -35,10 +35,18 @@ function initCustomDropdown(buttonId, listId, onSelect) {
                 const li = document.createElement('li');
                 li.textContent = lang.name;
                 li.dataset.code = lang.code;
-                li.className = 'px-3 py-2 hover:bg-gray-100 cursor-pointer truncate truncate-ellipsis';
+                li.className = 'px-4 py-2 hover:bg-gray-50 cursor-pointer truncate text-gray-700 text-sm font-medium transition-colors';
                 li.onclick = (ev) => {
                     ev.stopPropagation();
-                    btn.textContent = lang.name;
+                    // Update text content only (preserve chevron icon)
+                    const textSpan = btn.querySelector('span.truncate') || btn;
+                    if (textSpan !== btn) {
+                         textSpan.textContent = lang.name;
+                    } else {
+                        // Fallback if no span found (legacy structure)
+                        btn.textContent = lang.name;
+                    }
+                    
                     list.classList.add('hidden');
                     onSelect && onSelect(lang.code);
                 };
@@ -46,7 +54,12 @@ function initCustomDropdown(buttonId, listId, onSelect) {
 
                 // set default label
                 if (lang.code === defaultCode) {
-                    btn.textContent = lang.name;
+                    const textSpan = btn.querySelector('span.truncate') || btn;
+                    if (textSpan !== btn) {
+                         textSpan.textContent = lang.name;
+                    } else {
+                        btn.textContent = lang.name;
+                    }
                 }
             });
         }
@@ -227,11 +240,14 @@ class Translator {
         }, this.debounceDelay);
     }
 
-    // Fungsi untuk menampilkan status terjemahan
+    // Fungsi untuk menampilkan status terjemahan (Updated for new UI)
     showTranslationStatus = () => {
         if (this.translationStatus) {
             this.translationStatus.classList.remove('hidden');
-            this.translationStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> <span>Menerjemahkan...</span>';
+            // Check if using new progress bar style (has child elements) or old style
+            if (!this.translationStatus.firstElementChild) {
+                 this.translationStatus.innerHTML = '<div class="text-center text-sm text-gray-400 py-2"><i class="fas fa-spinner fa-spin mr-2"></i>Menerjemahkan...</div>';
+            }
         }
     }
 
@@ -341,12 +357,18 @@ class Translator {
             [this.inputText.value, this.outputText.value] = [this.outputText.value, this.inputText.value];
         }
 
-        // swap labels/buttons
+        // swap labels/buttons (Updated for text spans)
         const fromBtn = document.getElementById('fromBtn');
         const toBtn = document.getElementById('toBtn');
         
         if (fromBtn && toBtn) {
-            [fromBtn.textContent, toBtn.textContent] = [toBtn.textContent, fromBtn.textContent];
+            const fromSpan = fromBtn.querySelector('span.truncate') || fromBtn;
+            const toSpan = toBtn.querySelector('span.truncate') || toBtn;
+
+            // Swap text content
+            const tempText = fromSpan.textContent;
+            fromSpan.textContent = toSpan.textContent;
+            toSpan.textContent = tempText;
         }
 
         // Auto-translate setelah swap jika ada teks

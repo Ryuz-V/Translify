@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 <head>
     <meta lang="id">
     <meta charset="UTF-8">
@@ -11,414 +12,631 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
 </head>
+
 <body class="font-sans" style="font-family: 'Roboto', sans-serif;">
-<!-- header -->
-<header class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24">
-    <nav class="h-16 md:h-20">
-        <div class="container mx-auto h-full flex justify-between items-center">
-            <div class="flex items-center space-x-3">
-                <img src="/asset/icons8-translate-100.png" alt="logo" 
-                     class="w-12 h-12 md:w-16 md:h-16 object-contain">
-                <a href="#" class="text-2xl md:text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors">
-                    Translify
-                </a>
-            </div>
-            <ul class="flex items-center space-x-4 md:space-x-5">
-                <li class="hidden sm:block">
-                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" title="Settings">
-                        <img src="/asset/icons8-settings-64.png" alt="settings" class="w-6 h-6 md:w-7 md:h-7">
+    <!-- header -->
+    <header class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24">
+        <nav class="h-16 md:h-20">
+            <div class="container mx-auto h-full flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <img src="/asset/icons8-translate-100.png" alt="logo"
+                        class="w-12 h-12 md:w-16 md:h-16 object-contain">
+                    <a href="#"
+                        class="text-2xl md:text-2xl font-bold text-gray-800 hover:text-blue-600 transition-colors">
+                        Translify
                     </a>
-                </li>
-                <li class="hidden sm:block">
-                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" title="Ideas">
-                        <img src="/asset/icons8-idea-100.png" alt="idea" class="w-6 h-6 md:w-7 md:h-7">
-                    </a>
-                </li>
-                <li class="hidden sm:block">
-                    <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" title="Help">
-                        <img src="/asset/icons8-question-100.png" alt="question" class="w-6 h-6 md:w-7 md:h-7">
-                    </a>
-                </li>
-                <li class="sm:hidden">
-                    <button class="p-2 hover:bg-gray-100 rounded-full">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </li>
-                <li>
-                    <a href="#" class="bg-black text-white px-6 py-2.5 rounded-lg hover:bg-gray-800 transition-colors font-medium flex items-center space-x-2">
-                        <i class="fas fa-sign-in-alt"></i>
-                        <span>Masuk</span>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </nav>
-</header>
-
-<!-- main content -->
-<main class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-8 border-t border-gray-200 min-h-screen">
-    <section class="max-w-7xl mx-auto">
-        <!-- Translation Container -->
-        <div class="bg-white shadow-lg border border-gray-200">
-            <!-- Language Selection Box -->
-            <div class="border border-gray-200 p-3 md:p-4">
-                <div class="flex items-center justify-center space-x-4">
-                    <!-- From Language (custom) -->
-                    <div class="relative">
-                        <div class="relative w-32 md:w-40">
-                          <button id="fromBtn" type="button" class="dropdown-btn p-2 pr-8 rounded-lg bg-white border text-sm text-left truncate truncate-ellipsis">
-                            Indonesia
-                          </button>
-                          <ul id="fromList" class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list"></ul>
-                        </div>
-                    </div>
-
-                    <!-- Swap Button -->
-                    <div class="flex items-center justify-center">
-                        <button id="swapBtn" class="p-2 hover:bg-gray-50 rounded-full transition-colors bg-white" title="Tukar bahasa">
-                            <i class="fas fa-exchange-alt text-gray-700"></i>
+                </div>
+                <ul class="flex items-center space-x-4 md:space-x-5">
+                    <li class="hidden sm:block">
+                        <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" title="Settings">
+                            <img src="/asset/icons8-settings-64.png" alt="settings" class="w-6 h-6 md:w-7 md:h-7">
+                        </a>
+                    </li>
+                    <li class="hidden sm:block">
+                        <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" title="Ideas">
+                            <img src="/asset/icons8-idea-100.png" alt="idea" class="w-6 h-6 md:w-7 md:h-7">
+                        </a>
+                    </li>
+                    <li class="hidden sm:block">
+                        <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" title="Help">
+                            <img src="/asset/icons8-question-100.png" alt="question" class="w-6 h-6 md:w-7 md:h-7">
+                        </a>
+                    </li>
+                    <li class="sm:hidden">
+                        <button class="p-2 hover:bg-gray-100 rounded-full">
+                            <i class="fas fa-bars text-xl"></i>
                         </button>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="bg-black text-white px-6 py-2.5 rounded-lg hover:bg-gray-800 transition-colors font-medium flex items-center space-x-2">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span>Masuk</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- main content -->
+    <main class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-8 border-t border-gray-200 min-h-screen">
+        <section class="max-w-7xl mx-auto">
+            <!-- Translation Container -->
+            <div class="bg-white shadow-lg border border-gray-200">
+                <!-- Language Selection Box -->
+                <div class="border border-gray-200 p-3 md:p-4">
+                    <div class="flex items-center justify-center space-x-4">
+                        <!-- From Language (custom) -->
+                        <div class="relative">
+                            <div class="relative w-32 md:w-40">
+                                <button id="fromBtn" type="button"
+                                    class="dropdown-btn p-2 pr-8 rounded-lg bg-white border text-sm text-left truncate truncate-ellipsis">
+                                    Indonesia
+                                </button>
+                                <ul id="fromList"
+                                    class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list">
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Swap Button -->
+                        <div class="flex items-center justify-center">
+                            <button id="swapBtn" class="p-2 hover:bg-gray-50 rounded-full transition-colors bg-white"
+                                title="Tukar bahasa">
+                                <i class="fas fa-exchange-alt text-gray-700"></i>
+                            </button>
+                        </div>
+
+                        <!-- To Language (custom) -->
+                        <div class="relative">
+                            <div class="relative w-32 md:w-40">
+                                <button id="toBtn" type="button"
+                                    class="dropdown-btn p-2 pr-8 rounded-lg bg-white border text-sm text-left truncate truncate-ellipsis">
+                                    English
+                                </button>
+                                <ul id="toList"
+                                    class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Text Areas Row -->
+                <div class="flex flex-col md:flex-row">
+                    <!-- Input Text Area -->
+                    <div class="flex-1 border border-gray-200">
+                        <div class="h-80 md:h-[26rem]">
+                            <textarea id="input-text"
+                                class="w-full h-full p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
+                                placeholder="Ketik teks di sini..." rows="10"></textarea>
+                        </div>
                     </div>
 
-                    <!-- To Language (custom) -->
-                    <div class="relative">
-                        <div class="relative w-32 md:w-40">
-                          <button id="toBtn" type="button" class="dropdown-btn p-2 pr-8 rounded-lg bg-white border text-sm text-left truncate truncate-ellipsis">
-                            English
-                          </button>
-                          <ul id="toList" class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list"></ul>
+                    <!-- Output Text Area -->
+                    <div class="flex-1 border border-gray-200">
+                        <div class="h-80 md:h-[26rem]">
+                            <textarea id="output-text"
+                                class="w-full h-full p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
+                                rows="10" readonly></textarea>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Text Areas Row -->
-            <div class="flex flex-col md:flex-row">
-                <!-- Input Text Area -->
-                <div class="flex-1 border border-gray-200">
-                    <div class="h-80 md:h-[26rem]">
-                        <textarea 
-                            id="input-text"
-                            class="w-full h-full p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
-                            placeholder="Ketik teks di sini..."
-                            rows="10"></textarea>
+
+            <!-- Translate Button -->
+            <div class="flex justify-center">
+                <div id="translationStatus" class="text-gray-500 text-sm hidden">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <span>Menerjemahkan...</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- kamus -->
+        <section class="kamus max-w-7xl mx-auto mt-4 md:mt-2">
+            <div class="container_kamus bg-white shadow-lg border border-gray-200 px-4 pt-10">
+                <!-- Header Kamus -->
+                <div class="title">
+                    <h2 class="txt_title">Kamus</h2>
+                </div>
+                <!-- Konten Kamus -->
+                <div class="content_kamus">
+                    <p class="main_content">
+                        Kamus tidak tersedia untuk pasangan bahasa ini.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Brand  -->
+    <section class="brand-section mb-10">
+        <div class="brand-container">
+            <h2 class="brand-title">Hadir Dan Dipercaya Oleh Ratusan Ribu Bisnis Internasional</h2>
+            <div class="brand-slider-wrapper">
+                <!-- Slider 1 -->
+                <div class="brand-slider">
+                    <div class="brand-track">
+                        <img src="/asset/brand/brand1.png" alt="Brand 1">
+                        <img src="/asset/brand/brand2.png" alt="Brand 2">
+                        <img src="/asset/brand/brand3.png" alt="Brand 3">
+                        <img src="/asset/brand/brand4.png" alt="Brand 4">
+                        <img src="/asset/brand/brand5.png" alt="Brand 5">
+                        <img src="/asset/brand/brand6.png" alt="Brand 6">
+                        <img src="/asset/brand/brand7.png" alt="Brand 7">
+                        <img src="/asset/brand/brand8.png" alt="Brand 8">
+                        <img src="/asset/brand/brand9.png" alt="Brand 9">
+                        <img src="/asset/brand/brand10.png" alt="Brand 10">
+                        <img src="/asset/brand/brand11.webp" alt="Brand 11">
+                        <img src="/asset/brand/brand12.png" alt="Brand 12">
+                        <img src="/asset/brand/brand13.png" alt="Brand 13">
+                        <!-- Duplicate for seamless loop -->
+                        <img src="/asset/brand/brand1.png" alt="Brand 1">
+                        <img src="/asset/brand/brand2.png" alt="Brand 2">
+                        <img src="/asset/brand/brand3.png" alt="Brand 3">
+                        <img src="/asset/brand/brand4.png" alt="Brand 4">
+                        <img src="/asset/brand/brand5.png" alt="Brand 5">
+                        <img src="/asset/brand/brand6.png" alt="Brand 6">
+                        <img src="/asset/brand/brand7.png" alt="Brand 7">
+                        <img src="/asset/brand/brand8.png" alt="Brand 8">
+                        <img src="/asset/brand/brand9.png" alt="Brand 9">
+                        <img src="/asset/brand/brand10.png" alt="Brand 10">
+                        <img src="/asset/brand/brand11.webp" alt="Brand 11">
+                        <img src="/asset/brand/brand12.png" alt="Brand 12">
+                        <img src="/asset/brand/brand13.png" alt="Brand 13">
+                        <img src="/asset/brand/brand1.png" alt="Brand 1">
+                        <img src="/asset/brand/brand2.png" alt="Brand 2">
+                        <img src="/asset/brand/brand3.png" alt="Brand 3">
+                        <img src="/asset/brand/brand4.png" alt="Brand 4">
+                        <img src="/asset/brand/brand5.png" alt="Brand 5">
+                        <img src="/asset/brand/brand6.png" alt="Brand 6">
+                        <img src="/asset/brand/brand7.png" alt="Brand 7">
+                        <img src="/asset/brand/brand8.png" alt="Brand 8">
+                        <img src="/asset/brand/brand9.png" alt="Brand 9">
+                        <img src="/asset/brand/brand10.png" alt="Brand 10">
+                        <img src="/asset/brand/brand11.webp" alt="Brand 11">
+                        <img src="/asset/brand/brand12.png" alt="Brand 12">
+                        <img src="/asset/brand/brand13.png" alt="Brand 13">
                     </div>
                 </div>
 
-                <!-- Output Text Area -->
-                <div class="flex-1 border border-gray-200">
-                    <div class="h-80 md:h-[26rem]">
-                        <textarea 
-                            id="output-text"
-                            class="w-full h-full p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
-                            rows="10"
-                            readonly></textarea>
+                <!-- Slider 2 -->
+                <div class="brand-slider">
+                    <div class="brand-track-2">
+                        <img src="/asset/brand/brand14.png" alt="Brand 14">
+                        <img src="/asset/brand/brand15.png" alt="Brand 15">
+                        <img src="/asset/brand/brand16.png" alt="Brand 16">
+                        <img src="/asset/brand/brand17.png" alt="Brand 17">
+                        <img src="/asset/brand/brand18.png" alt="Brand 18">
+                        <img src="/asset/brand/brand19.png" alt="Brand 19">
+                        <img src="/asset/brand/brand20.png" alt="Brand 20">
+                        <img src="/asset/brand/brand21.png" alt="Brand 21">
+                        <img src="/asset/brand/brand22.png" alt="Brand 22">
+                        <img src="/asset/brand/brand23.png" alt="Brand 23">
+                        <img src="/asset/brand/brand24.png" alt="Brand 24">
+                        <img src="/asset/brand/brand25.png" alt="Brand 25">
+                        <img src="/asset/brand/brand26.png" alt="Brand 26">
+                        <!-- Duplicate for seamless loop -->
+                        <img src="/asset/brand/brand14.png" alt="Brand 14">
+                        <img src="/asset/brand/brand15.png" alt="Brand 15">
+                        <img src="/asset/brand/brand16.png" alt="Brand 16">
+                        <img src="/asset/brand/brand17.png" alt="Brand 17">
+                        <img src="/asset/brand/brand18.png" alt="Brand 18">
+                        <img src="/asset/brand/brand19.png" alt="Brand 19">
+                        <img src="/asset/brand/brand20.png" alt="Brand 20">
+                        <img src="/asset/brand/brand21.png" alt="Brand 21">
+                        <img src="/asset/brand/brand22.png" alt="Brand 22">
+                        <img src="/asset/brand/brand23.png" alt="Brand 23">
+                        <img src="/asset/brand/brand24.png" alt="Brand 24">
+                        <img src="/asset/brand/brand25.png" alt="Brand 25">
+                        <img src="/asset/brand/brand26.png" alt="Brand 26">
+                        <img src="/asset/brand/brand14.png" alt="Brand 14">
+                        <img src="/asset/brand/brand15.png" alt="Brand 15">
+                        <img src="/asset/brand/brand16.png" alt="Brand 16">
+                        <img src="/asset/brand/brand17.png" alt="Brand 17">
+                        <img src="/asset/brand/brand18.png" alt="Brand 18">
+                        <img src="/asset/brand/brand19.png" alt="Brand 19">
+                        <img src="/asset/brand/brand20.png" alt="Brand 20">
+                        <img src="/asset/brand/brand21.png" alt="Brand 21">
+                        <img src="/asset/brand/brand22.png" alt="Brand 22">
+                        <img src="/asset/brand/brand23.png" alt="Brand 23">
+                        <img src="/asset/brand/brand24.png" alt="Brand 24">
+                        <img src="/asset/brand/brand25.png" alt="Brand 25">
+                        <img src="/asset/brand/brand26.png" alt="Brand 26">
+                    </div>
+                </div>
+
+                <!-- Slider 3 -->
+                <div class="brand-slider">
+                    <div class="brand-track-3">
+                        <img src="/asset/brand/brand27.png" alt="Brand 27">
+                        <img src="/asset/brand/brand28.png" alt="Brand 28">
+                        <img src="/asset/brand/brand29.png" alt="Brand 29">
+                        <img src="/asset/brand/brand30.png" alt="Brand 30">
+                        <img src="/asset/brand/brand31.png" alt="Brand 31">
+                        <img src="/asset/brand/brand32.png" alt="Brand 32">
+                        <img src="/asset/brand/brand33.png" alt="Brand 33">
+                        <img src="/asset/brand/brand34.png" alt="Brand 34">
+                        <img src="/asset/brand/brand35.png" alt="Brand 35">
+                        <img src="/asset/brand/brand36.png" alt="Brand 36">
+                        <!-- Duplicate for seamless loop -->
+                        <img src="/asset/brand/brand27.png" alt="Brand 27">
+                        <img src="/asset/brand/brand28.png" alt="Brand 28">
+                        <img src="/asset/brand/brand29.png" alt="Brand 29">
+                        <img src="/asset/brand/brand30.png" alt="Brand 30">
+                        <img src="/asset/brand/brand31.png" alt="Brand 31">
+                        <img src="/asset/brand/brand32.png" alt="Brand 32">
+                        <img src="/asset/brand/brand33.png" alt="Brand 33">
+                        <img src="/asset/brand/brand34.png" alt="Brand 34">
+                        <img src="/asset/brand/brand35.png" alt="Brand 35">
+                        <img src="/asset/brand/brand36.png" alt="Brand 36">
+                        <img src="/asset/brand/brand27.png" alt="Brand 27">
+                        <img src="/asset/brand/brand28.png" alt="Brand 28">
+                        <img src="/asset/brand/brand29.png" alt="Brand 29">
+                        <img src="/asset/brand/brand30.png" alt="Brand 30">
+                        <img src="/asset/brand/brand31.png" alt="Brand 31">
+                        <img src="/asset/brand/brand32.png" alt="Brand 32">
+                        <img src="/asset/brand/brand33.png" alt="Brand 33">
+                        <img src="/asset/brand/brand34.png" alt="Brand 34">
+                        <img src="/asset/brand/brand35.png" alt="Brand 35">
+                        <img src="/asset/brand/brand36.png" alt="Brand 36">
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- Translate Button -->
-<div class="flex justify-center">
-    <div id="translationStatus" class="text-gray-500 text-sm hidden">
-        <i class="fas fa-spinner fa-spin"></i>
-        <span>Menerjemahkan...</span>
-    </div>
-</div>
     </section>
 
-<!-- kamus -->
-<section class="kamus max-w-7xl mx-auto mt-4 md:mt-2">
-    <div class="container_kamus bg-white shadow-lg border border-gray-200 px-4 pt-10">
-        <!-- Header Kamus -->
-        <div class="title">
-            <h2 class="txt_title">Kamus</h2>
-        </div>
-        <!-- Konten Kamus -->
-        <div class="content_kamus">
-            <p class="main_content">
-                Kamus tidak tersedia untuk pasangan bahasa ini.
-            </p>
-        </div>
-    </div>
-</section>
-</main>
-
-<!-- Brand  -->
-<section class="brand-section mb-10">
-    <div class="brand-container">
-        <h2 class="brand-title">Hadir Dan Dipercaya Oleh Ratusan Ribu Bisnis Internasional</h2>
-        <div class="brand-slider-wrapper">
-            <!-- Slider 1 -->
-            <div class="brand-slider">
-                <div class="brand-track">
-                    <img src="/asset/brand/brand1.png" alt="Brand 1">
-                    <img src="/asset/brand/brand2.png" alt="Brand 2">
-                    <img src="/asset/brand/brand3.png" alt="Brand 3">
-                    <img src="/asset/brand/brand4.png" alt="Brand 4">
-                    <img src="/asset/brand/brand5.png" alt="Brand 5">
-                    <img src="/asset/brand/brand6.png" alt="Brand 6">
-                    <img src="/asset/brand/brand7.png" alt="Brand 7">
-                    <img src="/asset/brand/brand8.png" alt="Brand 8">
-                    <img src="/asset/brand/brand9.png" alt="Brand 9">
-                    <img src="/asset/brand/brand10.png" alt="Brand 10">
-                    <img src="/asset/brand/brand11.webp" alt="Brand 11">
-                    <img src="/asset/brand/brand12.png" alt="Brand 12">
-                    <img src="/asset/brand/brand13.png" alt="Brand 13">
-                    <!-- Duplicate for seamless loop -->
-                    <img src="/asset/brand/brand1.png" alt="Brand 1">
-                    <img src="/asset/brand/brand2.png" alt="Brand 2">
-                    <img src="/asset/brand/brand3.png" alt="Brand 3">
-                    <img src="/asset/brand/brand4.png" alt="Brand 4">
-                    <img src="/asset/brand/brand5.png" alt="Brand 5">
-                    <img src="/asset/brand/brand6.png" alt="Brand 6">
-                    <img src="/asset/brand/brand7.png" alt="Brand 7">
-                    <img src="/asset/brand/brand8.png" alt="Brand 8">
-                    <img src="/asset/brand/brand9.png" alt="Brand 9">
-                    <img src="/asset/brand/brand10.png" alt="Brand 10">
-                    <img src="/asset/brand/brand11.webp" alt="Brand 11">
-                    <img src="/asset/brand/brand12.png" alt="Brand 12">
-                    <img src="/asset/brand/brand13.png" alt="Brand 13">
-                    <img src="/asset/brand/brand1.png" alt="Brand 1">
-                    <img src="/asset/brand/brand2.png" alt="Brand 2">
-                    <img src="/asset/brand/brand3.png" alt="Brand 3">
-                    <img src="/asset/brand/brand4.png" alt="Brand 4">
-                    <img src="/asset/brand/brand5.png" alt="Brand 5">
-                    <img src="/asset/brand/brand6.png" alt="Brand 6">
-                    <img src="/asset/brand/brand7.png" alt="Brand 7">
-                    <img src="/asset/brand/brand8.png" alt="Brand 8">
-                    <img src="/asset/brand/brand9.png" alt="Brand 9">
-                    <img src="/asset/brand/brand10.png" alt="Brand 10">
-                    <img src="/asset/brand/brand11.webp" alt="Brand 11">
-                    <img src="/asset/brand/brand12.png" alt="Brand 12">
-                    <img src="/asset/brand/brand13.png" alt="Brand 13">
-                </div>
+    <!-- about section -->
+    <section class="relative bg-gradient-to-br from-[#1B3BB2] to-[#0A1E5E] py-20 md:py-32 mt-3.5 overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none">
+            <div
+                class="absolute -top-24 -left-24 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob">
             </div>
-
-            <!-- Slider 2 -->
-            <div class="brand-slider">
-                <div class="brand-track-2">
-                    <img src="/asset/brand/brand14.png" alt="Brand 14">
-                    <img src="/asset/brand/brand15.png" alt="Brand 15">
-                    <img src="/asset/brand/brand16.png" alt="Brand 16">
-                    <img src="/asset/brand/brand17.png" alt="Brand 17">
-                    <img src="/asset/brand/brand18.png" alt="Brand 18">
-                    <img src="/asset/brand/brand19.png" alt="Brand 19">
-                    <img src="/asset/brand/brand20.png" alt="Brand 20">
-                    <img src="/asset/brand/brand21.png" alt="Brand 21">
-                    <img src="/asset/brand/brand22.png" alt="Brand 22">
-                    <img src="/asset/brand/brand23.png" alt="Brand 23">
-                    <img src="/asset/brand/brand24.png" alt="Brand 24">
-                    <img src="/asset/brand/brand25.png" alt="Brand 25">
-                    <img src="/asset/brand/brand26.png" alt="Brand 26">
-                    <!-- Duplicate for seamless loop -->
-                    <img src="/asset/brand/brand14.png" alt="Brand 14">
-                    <img src="/asset/brand/brand15.png" alt="Brand 15">
-                    <img src="/asset/brand/brand16.png" alt="Brand 16">
-                    <img src="/asset/brand/brand17.png" alt="Brand 17">
-                    <img src="/asset/brand/brand18.png" alt="Brand 18">
-                    <img src="/asset/brand/brand19.png" alt="Brand 19">
-                    <img src="/asset/brand/brand20.png" alt="Brand 20">
-                    <img src="/asset/brand/brand21.png" alt="Brand 21">
-                    <img src="/asset/brand/brand22.png" alt="Brand 22">
-                    <img src="/asset/brand/brand23.png" alt="Brand 23">
-                    <img src="/asset/brand/brand24.png" alt="Brand 24">
-                    <img src="/asset/brand/brand25.png" alt="Brand 25">
-                    <img src="/asset/brand/brand26.png" alt="Brand 26">
-                    <img src="/asset/brand/brand14.png" alt="Brand 14">
-                    <img src="/asset/brand/brand15.png" alt="Brand 15">
-                    <img src="/asset/brand/brand16.png" alt="Brand 16">
-                    <img src="/asset/brand/brand17.png" alt="Brand 17">
-                    <img src="/asset/brand/brand18.png" alt="Brand 18">
-                    <img src="/asset/brand/brand19.png" alt="Brand 19">
-                    <img src="/asset/brand/brand20.png" alt="Brand 20">
-                    <img src="/asset/brand/brand21.png" alt="Brand 21">
-                    <img src="/asset/brand/brand22.png" alt="Brand 22">
-                    <img src="/asset/brand/brand23.png" alt="Brand 23">
-                    <img src="/asset/brand/brand24.png" alt="Brand 24">
-                    <img src="/asset/brand/brand25.png" alt="Brand 25">
-                    <img src="/asset/brand/brand26.png" alt="Brand 26">
-                </div>
+            <div
+                class="absolute top-0 -right-4 w-72 h-72 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000">
             </div>
+            <div
+                class="absolute -bottom-8 left-20 w-72 h-72 bg-indigo-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000">
+            </div>
+        </div>
 
-            <!-- Slider 3 -->
-            <div class="brand-slider">
-                <div class="brand-track-3">
-                    <img src="/asset/brand/brand27.png" alt="Brand 27">
-                    <img src="/asset/brand/brand28.png" alt="Brand 28">
-                    <img src="/asset/brand/brand29.png" alt="Brand 29">
-                    <img src="/asset/brand/brand30.png" alt="Brand 30">
-                    <img src="/asset/brand/brand31.png" alt="Brand 31">
-                    <img src="/asset/brand/brand32.png" alt="Brand 32">
-                    <img src="/asset/brand/brand33.png" alt="Brand 33">
-                    <img src="/asset/brand/brand34.png" alt="Brand 34">
-                    <img src="/asset/brand/brand35.png" alt="Brand 35">
-                    <img src="/asset/brand/brand36.png" alt="Brand 36">
-                    <!-- Duplicate for seamless loop -->
-                    <img src="/asset/brand/brand27.png" alt="Brand 27">
-                    <img src="/asset/brand/brand28.png" alt="Brand 28">
-                    <img src="/asset/brand/brand29.png" alt="Brand 29">
-                    <img src="/asset/brand/brand30.png" alt="Brand 30">
-                    <img src="/asset/brand/brand31.png" alt="Brand 31">
-                    <img src="/asset/brand/brand32.png" alt="Brand 32">
-                    <img src="/asset/brand/brand33.png" alt="Brand 33">
-                    <img src="/asset/brand/brand34.png" alt="Brand 34">
-                    <img src="/asset/brand/brand35.png" alt="Brand 35">
-                    <img src="/asset/brand/brand36.png" alt="Brand 36">
-                    <img src="/asset/brand/brand27.png" alt="Brand 27">
-                    <img src="/asset/brand/brand28.png" alt="Brand 28">
-                    <img src="/asset/brand/brand29.png" alt="Brand 29">
-                    <img src="/asset/brand/brand30.png" alt="Brand 30">
-                    <img src="/asset/brand/brand31.png" alt="Brand 31">
-                    <img src="/asset/brand/brand32.png" alt="Brand 32">
-                    <img src="/asset/brand/brand33.png" alt="Brand 33">
-                    <img src="/asset/brand/brand34.png" alt="Brand 34">
-                    <img src="/asset/brand/brand35.png" alt="Brand 35">
-                    <img src="/asset/brand/brand36.png" alt="Brand 36">
+        <div class="max-w-7xl mx-auto px-2 sm:px-4 relative z-10">
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                <!-- Konten Teks (Kiri) -->
+                <div class="w-full lg:w-1/2 text-white">
+                    <!-- Judul -->
+                    <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight tracking-tight">
+                        Translify Menghubungkan <span
+                            class="text-transparent bg-clip-text bg-gradient-to-r from-blue-200 to-white">Dunia</span>
+                    </h2>
+
+                    <!-- Deskripsi -->
+                    <p class="text-lg md:text-xl mb-8 text-blue-100 leading-relaxed max-w-lg">
+                        Hapus batasan bahasa dalam sekejap. Translify menghadirkan teknologi penerjemahan cerdas yang
+                        akurat, cepat, dan alami untuk komunikasi tanpa batas.
+                    </p>
+
+                    <!-- Poin-poin keunggulan -->
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-center space-x-4 group">
+                            <div
+                                class="bg-white/10 p-2 rounded-lg group-hover:bg-blue-500 transition-colors duration-300">
+                                <i class="fas fa-check text-white"></i>
+                            </div>
+                            <span class="text-lg font-medium">Akurasi tinggi dengan konteks yang tepat</span>
+                        </div>
+                        <div class="flex items-center space-x-4 group">
+                            <div
+                                class="bg-white/10 p-2 rounded-lg group-hover:bg-blue-500 transition-colors duration-300">
+                                <i class="fas fa-globe text-white"></i>
+                            </div>
+                            <span class="text-lg font-medium">100+ bahasa didukung</span>
+                        </div>
+                        <div class="flex items-center space-x-4 group">
+                            <div
+                                class="bg-white/10 p-2 rounded-lg group-hover:bg-blue-500 transition-colors duration-300">
+                                <i class="fas fa-infinity text-white"></i>
+                            </div>
+                            <span class="text-lg font-medium">Gratis dan tanpa batasan harian</span>
+                        </div>
+                    </div>
+
+                    <!-- Button -->
+                    <div class="flex flex-wrap gap-5">
+                        <button
+                            class="bg-white text-[#1B3BB2] px-8 py-4 rounded-xl font-bold text-lg hover:scale-105 transition-all duration-300 shadow-[0_10px_20px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_25px_rgba(0,0,0,0.3)]">
+                            Pelajari Selengkapnya
+                        </button>
+                        <button
+                            class="group flex items-center gap-2 border-2 border-white/30 hover:border-white text-white px-8 py-4 rounded-xl font-bold text-lg hover:bg-white/10 transition-all duration-300">
+                            Hubungi Kami
+                            <i class="fas fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Video (Kanan) -->
+                <div class="w-full lg:w-1/2">
+                    <div class="relative group">
+                        <div
+                            class="absolute -inset-1 bg-gradient-to-r from-blue-400 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-60 transition duration-1000 group-hover:duration-200">
+                        </div>
+                        <div class="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10">
+                            <video
+                                class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-[1.02]"
+                                autoplay muted loop playsinline>
+                                <source src="/asset/Translify_ Your World, Translated.mp4" type="video/mp4">
+                                Browser Anda tidak mendukung tag video.
+                            </video>
+                            <!-- Video Overlay Gradient -->
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent pointer-events-none">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- about section -->
-<section class="bg-[#1B3BB2] py-16 md:py-24 mt-3.5">
-    <div class="max-w-7xl mx-auto">
-        <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
-            <!-- Konten Teks (Kiri) -->
-            <div class="w-full lg:w-1/2 text-white">
-                <!-- Judul -->
-                <h2 class="text-3xl md:text-4xl lg:text[5rem] font-bold mb-6 leading-tight">
-                    Translify Menghubungkan Dunia
+    <!-- API Section -->
+    <section class="relative bg-[#0F2B46] py-24 px-4 md:px-8 lg:px-16 overflow-hidden">
+        <!-- Background Effects -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-500/10 rounded-full blur-[100px]"></div>
+            <div class="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-500/10 rounded-full blur-[100px]"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- Header -->
+            <div class="flex flex-col items-center text-center mb-16 max-w-2xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold text-white leading-tight mb-6">
+                    Wujudkan Terjemahan <br>
+                    <span class="text-blue-400">Kelas Dunia</span> Dengan Mudah
                 </h2>
-                
-                <!-- Deskripsi -->
-                <p class="text-base md:text-lg mb-8 opacity-90 leading-relaxed">
-                    Translify hadir untuk memudahkan komunikasi lintas bahasa dengan teknologi 
-                    penerjemahan akurat dan cepat.
+                <p class="text-gray-300 text-lg md:text-xl mb-10">
+                    Integrasikan kekuatan Translify ke dalam aplikasi Anda hanya dalam beberapa baris kode. Cepat,
+                    skalabel, dan terpercaya.
                 </p>
-                
-                <!-- Poin-poin keunggulan -->
-                <div class="space-y-3 mb-8">
-                    <div class="flex items-start space-x-3">
-                        <i class="fas fa-check-circle text-white mt-1"></i>
-                        <span>Akurasi tinggi dengan konteks yang tepat</span>
-                    </div>
-                    <div class="flex items-start space-x-3">
-                        <i class="fas fa-check-circle text-white mt-1"></i>
-                        <span>100+ bahasa didukung</span>
-                    </div>
-                    <div class="flex items-start space-x-3">
-                        <i class="fas fa-check-circle text-white mt-1"></i>
-                        <span>Gratis dan tanpa batasan harian</span>
-                    </div>
-                </div>
-                
-                <!-- Button -->
-                <div class="flex flex-wrap gap-4">
-                    <button class="bg-white text-[#1B3BB2] px-8 py-3 rounded-lg font-semibold hover:bg-opacity-90 transition-all duration-300 shadow-lg hover:shadow-xl">
-                        Pelajari Selengkapnya
+
+                <!-- Main CTA -->
+                <div class="flex flex-col sm:flex-row justify-center gap-4">
+                    <button
+                        class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-10 py-4 rounded-xl transition-all duration-300 shadow-lg hover:shadow-blue-500/50 hover:-translate-y-1">
+                        Mulai Gratis Sekarang
                     </button>
-                    <button class="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#1B3BB2] transition-all duration-300">
-                        Hubungi Kami
+                    <button
+                        class="bg-transparent border border-gray-600 hover:border-white text-gray-300 hover:text-white font-semibold px-10 py-4 rounded-xl transition-all duration-300">
+                        Baca Dokumentasi
                     </button>
                 </div>
             </div>
-            
-            <!-- Video (Kanan) -->
-            <div class="w-full lg:w-1/2">
-                <div class="relative rounded-xl overflow-hidden shadow-2xl">
-                    <video 
-                        class="w-full h-auto object-cover"
-                        autoplay 
-                        muted 
-                        loop 
-                        playsinline
-                    >
-                        <source src="/asset/Translify_ Your World, Translated.mp4" type="video/mp4">
-                        Browser Anda tidak mendukung tag video.
-                    </video>
+
+            <!-- Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div
+                    class="group bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-rocket text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-white text-xl font-bold mb-4">
+                        Implementasi Cepat
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Baca panduan cepat kami dan mulai menerjemahkan konten dalam hitungan menit dengan SDK yang
+                        mudah digunakan.
+                    </p>
+                    <a href="#"
+                        class="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors font-medium">
+                        Lihat Tutorial <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+
+                <!-- Card 2 -->
+                <div
+                    class="group bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-users text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-white text-xl font-bold mb-4">
+                        Komunitas & Dukungan
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Terhubung dengan komunitas pengembang kami, dapatkan tips, serta dukungan profesional kapan
+                        saja.
+                    </p>
+                    <a href="#"
+                        class="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors font-medium">
+                        Gabung Komunitas <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
+                </div>
+
+                <!-- Card 3 -->
+                <div
+                    class="group bg-white/5 backdrop-blur-md border border-white/10 p-8 rounded-2xl hover:bg-white/10 transition-all duration-300 hover:-translate-y-2">
+                    <div
+                        class="w-14 h-14 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas fa-code text-2xl text-white"></i>
+                    </div>
+                    <h3 class="text-white text-xl font-bold mb-4">
+                        Sandbox & Percobaan
+                    </h3>
+                    <p class="text-gray-400 leading-relaxed mb-6">
+                        Coba sendiri kemampuan API kami dengan lingkungan sandbox gratis sebelum Anda memutuskan untuk
+                        upgrade.
+                    </p>
+                    <a href="#"
+                        class="inline-flex items-center text-indigo-400 hover:text-indigo-300 transition-colors font-medium">
+                        Coba API Konsol <i class="fas fa-arrow-right ml-2 text-sm"></i>
+                    </a>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- API Section -->
-<section class="bg-[#0F2B46] py-16 px-4 md:px-8 lg:px-16">
-    <div class="max-w-7xl mx-auto">
-        <!-- Header -->
-        <div class="text-center mb-12">
-            <h2 class="text-3xl md:text-4xl lg:text-4xl font-bold text-white leading-tight">
-                Wujudkan Terjemahan <br> Kelas Dunia Dengan Mudah Bersama API Kami
-            </h2>
-        </div>
-
-        <!-- Button Section -->
-        <div class="flex justify-center gap-4 mb-16">
-            <button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-12 py-3 rounded-lg transition duration-300 -translate-y-4">
-                Mulai Sekarang
-            </button>
-        </div>
-
-        <!-- Content with Image Left and Cards Right -->
-        <div class="flex flex-col lg:flex-row gap-8 items-start">
-            <!-- Main Image (Left Side) -->
-            <div class="lg:w-2/5">
-                <img src="/asset/Screenshot 2026-02-16 100447.png" 
-                     alt="API Documentation Screenshot"
-                     class="w-full rounded-xl shadow-2xl border border-gray-700">
+    <!-- Industry Section -->
+    <section class="industry-section py-20 px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <!-- Header Content -->
+            <div class="mb-12">
+                <h2 class="text-5xl md:text-7xl font-bold text-gray-900 mb-8 leading-tight max-w-5xl">
+                    Kami Berbicara Dalam Bahasa Industri Anda
+                </h2>
+                <p class="text-lg md:text-xl text-gray-600 mb-8 max-w-5xl leading-relaxed">
+                    Percepat kolaborasi dan dorong efisiensi dengan glosarium khusus, kendali dalam bentuk, dan keamanan
+                    tingkat perusahaan yang dirancang untuk mencerminkan dunia Anda.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="#"
+                        class="inline-flex items-center justify-center px-8 py-3 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-full transition-colors duration-200">
+                        Hubungi Tim Penjualan
+                    </a>
+                </div>
             </div>
 
-            <!-- Post Cards (Right Side) - All Cards Same Width with Larger Height -->
-            <div class="lg:w-3/5">
-                <div class="flex flex-col gap-6">
-                    <!-- Card 1 -->
-                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 hover:bg-white/20 transition duration-300">
-                        <div class="flex flex-col md:flex-row gap-8 items-center">
-                            <img src="/asset/Screenshot 2026-02-16 100447.png" 
-                                 alt="API Documentation Screenshot"
-                                 class="w-full md:w-56 h-40 object-cover rounded-lg">
-                            <h3 class="text-white text-2xl font-semibold flex-1 leading-relaxed">
-                                Baca panduan cepat kami, mulai dalam hitungan menit
-                            </h3>
-                        </div>
+            <!-- Industry Grid (Horizontal Scroll) -->
+            <div
+                class="flex overflow-x-auto pb-8 -mx-4 px-4 sm:mx-0 sm:px-0 gap-6 snap-x snap-mandatory scrollbar-hide">
+                <!-- Card: Ilmu pengetahuan hayati -->
+                <div
+                    class="flex-none w-80 sm:w-72 md:w-80 snap-center group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer ring-1 ring-black/5">
+                    <div class="bg-sky-400 p-4 flex justify-between items-center text-white">
+                        <span class="font-medium text-lg">Ilmu pengetahuan hayati</span>
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
                     </div>
+                    <div class="aspect-[4/3] w-full bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1532094349884-543bc11b234d?auto=format&fit=crop&q=80&w=600"
+                            alt="Life Sciences"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
+                    </div>
+                </div>
 
-                    <!-- Cards 2 & 3 Container - Vertikal Stack (Full Width) -->
-                    <div class="flex flex-col gap-6">
-                        <!-- Card 2 -->
-                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 hover:bg-white/20 transition duration-300">
-                            <div class="flex flex-col md:flex-row gap-8 items-center">
-                                <img src="/asset/Screenshot 2026-02-16 100447.png" 
-                                     alt="API Documentation Screenshot"
-                                     class="w-full md:w-56 h-40 object-cover rounded-lg">
-                                <h3 class="text-white text-2xl font-semibold flex-1 leading-relaxed">
-                                    Terhubung dengan komunitas kami, dapatkan tips serta dukungan profesional
-                                </h3>
-                            </div>
-                        </div>
+                <!-- Card: Manufaktur -->
+                <div
+                    class="flex-none w-80 sm:w-72 md:w-80 snap-center group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer ring-1 ring-black/5">
+                    <div class="bg-sky-400 p-4 flex justify-between items-center text-white">
+                        <span class="font-medium text-lg">Manufaktur</span>
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                    <div class="aspect-[4/3] w-full bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&q=80&w=600"
+                            alt="Manufacturing"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
+                    </div>
+                </div>
 
-                        <!-- Card 3 -->
-                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-8 hover:bg-white/20 transition duration-300">
-                            <div class="flex flex-col md:flex-row gap-8 items-center">
-                                <img src="/asset/Screenshot 2026-02-16 100447.png" 
-                                     alt="API Documentation Screenshot"
-                                     class="w-full md:w-56 h-40 object-cover rounded-lg">
-                                <h3 class="text-white text-2xl font-semibold flex-1 leading-relaxed">
-                                    Coba sendiri dengan uji coba gratis
-                                </h3>
-                            </div>
-                        </div>
+                <!-- Card: Legal -->
+                <div
+                    class="flex-none w-80 sm:w-72 md:w-80 snap-center group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer ring-1 ring-black/5">
+                    <div class="bg-sky-400 p-4 flex justify-between items-center text-white">
+                        <span class="font-medium text-lg">Legal</span>
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                    <div class="aspect-[4/3] w-full bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?auto=format&fit=crop&q=80&w=600"
+                            alt="Legal"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
+                    </div>
+                </div>
+
+                <!-- Card: Keuangan -->
+                <div
+                    class="flex-none w-80 sm:w-72 md:w-80 snap-center group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer ring-1 ring-black/5">
+                    <div class="bg-sky-400 p-4 flex justify-between items-center text-white">
+                        <span class="font-medium text-lg">Keuangan</span>
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                    <div class="aspect-[4/3] w-full bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?auto=format&fit=crop&q=80&w=600"
+                            alt="Finance"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
+                    </div>
+                </div>
+
+                <!-- Card: Arsitektur -->
+                <div
+                    class="flex-none w-80 sm:w-72 md:w-80 snap-center group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer ring-1 ring-black/5">
+                    <div class="bg-sky-400 p-4 flex justify-between items-center text-white">
+                        <span class="font-medium text-lg">Arsitektur</span>
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                    <div class="aspect-[4/3] w-full bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&q=80&w=600"
+                            alt="Architecture"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
+                    </div>
+                </div>
+
+                <!-- Card: Pendidikan -->
+                <div
+                    class="flex-none w-80 sm:w-72 md:w-80 snap-center group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer ring-1 ring-black/5">
+                    <div class="bg-sky-400 p-4 flex justify-between items-center text-white">
+                        <span class="font-medium text-lg">Pendidikan</span>
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                    <div class="aspect-[4/3] w-full bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b?auto=format&fit=crop&q=80&w=600"
+                            alt="Education"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
+                    </div>
+                </div>
+
+                <!-- Card: Pemasaran -->
+                <div
+                    class="flex-none w-80 sm:w-72 md:w-80 snap-center group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer ring-1 ring-black/5">
+                    <div class="bg-sky-400 p-4 flex justify-between items-center text-white">
+                        <span class="font-medium text-lg">Pemasaran</span>
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                    <div class="aspect-[4/3] w-full bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=600"
+                            alt="Marketing"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
+                    </div>
+                </div>
+
+                <!-- Card: Teknologi -->
+                <div
+                    class="flex-none w-80 sm:w-72 md:w-80 snap-center group relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 cursor-pointer ring-1 ring-black/5">
+                    <div class="bg-sky-400 p-4 flex justify-between items-center text-white">
+                        <span class="font-medium text-lg">Teknologi</span>
+                        <i class="fas fa-arrow-right transform group-hover:translate-x-1 transition-transform"></i>
+                    </div>
+                    <div class="aspect-[4/3] w-full bg-gray-200 relative">
+                        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&q=80&w=600"
+                            alt="Technology"
+                            class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<script src="https://kit.fontawesome.com/5ea0eadb61.js" crossorigin="anonymous"></script>
-<script src="/src/js/index.js"></script>
+    <!-- intregratasi -->
+     <section class="">
+        <div class="">
+            <
+        </div>
+     </section>
+
+    <script src="https://kit.fontawesome.com/5ea0eadb61.js" crossorigin="anonymous"></script>
+    <script src="/src/js/index.js"></script>
 </body>
+
 </html>
