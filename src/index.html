@@ -100,20 +100,30 @@
                 <!-- Text Areas Row -->
                 <div class="flex flex-col md:flex-row">
                     <!-- Input Text Area -->
-                    <div class="flex-1 border border-gray-200">
-                        <div class="h-80 md:h-[26rem]">
-                            <textarea id="input-text"
-                                class="w-full h-full p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
-                                placeholder="Ketik teks di sini..." rows="10"></textarea>
+                    <div class="flex-1 border border-gray-200 bg-white flex flex-col h-80 md:h-[26rem]">
+                        <textarea id="input-text"
+                            class="w-full flex-1 p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
+                            placeholder="Ketik teks di sini..."></textarea>
+                        <div class="px-3 pb-3 flex justify-start items-center">
+                            <button id="listenInputBtn"
+                                class="hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 transition-colors"
+                                title="Dengarkan terjemahan asal">
+                                <i class="fas fa-volume-up text-lg"></i>
+                            </button>
                         </div>
                     </div>
 
                     <!-- Output Text Area -->
-                    <div class="flex-1 border border-gray-200">
-                        <div class="h-80 md:h-[26rem]">
-                            <textarea id="output-text"
-                                class="w-full h-full p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
-                                rows="10" readonly></textarea>
+                    <div class="flex-1 border border-gray-200 bg-gray-50 flex flex-col h-80 md:h-[26rem]">
+                        <textarea id="output-text"
+                            class="w-full flex-1 p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0 bg-transparent"
+                            readonly></textarea>
+                        <div class="px-3 pb-3 flex justify-start items-center">
+                            <button id="listenOutputBtn"
+                                class="hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 text-gray-500 transition-colors"
+                                title="Dengarkan hasil terjemahan">
+                                <i class="fas fa-volume-up text-lg"></i>
+                            </button>
                         </div>
                     </div>
                 </div>

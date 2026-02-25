@@ -41,12 +41,12 @@ function initCustomDropdown(buttonId, listId, onSelect) {
                     // Update text content only (preserve chevron icon)
                     const textSpan = btn.querySelector('span.truncate') || btn;
                     if (textSpan !== btn) {
-                         textSpan.textContent = lang.name;
+                        textSpan.textContent = lang.name;
                     } else {
                         // Fallback if no span found (legacy structure)
                         btn.textContent = lang.name;
                     }
-                    
+
                     list.classList.add('hidden');
                     onSelect && onSelect(lang.code);
                 };
@@ -56,7 +56,7 @@ function initCustomDropdown(buttonId, listId, onSelect) {
                 if (lang.code === defaultCode) {
                     const textSpan = btn.querySelector('span.truncate') || btn;
                     if (textSpan !== btn) {
-                         textSpan.textContent = lang.name;
+                        textSpan.textContent = lang.name;
                     } else {
                         btn.textContent = lang.name;
                     }
@@ -73,7 +73,10 @@ class Translator {
         this.outputText = document.getElementById('output-text');
         this.swapButton = document.getElementById('swapBtn');
         this.translationStatus = document.getElementById('translationStatus');
-        
+
+        this.listenInputBtn = document.getElementById('listenInputBtn');
+        this.listenOutputBtn = document.getElementById('listenOutputBtn');
+
         // state bahasa
         this.fromLang = 'id';
         this.toLang = 'en';
@@ -91,10 +94,10 @@ class Translator {
 
         // safety: if dropdown init failed
         if (!this.fromDropdown || !this.fromDropdown.setOptions) {
-            this.fromDropdown = { setOptions() {} };
+            this.fromDropdown = { setOptions() { } };
         }
         if (!this.toDropdown || !this.toDropdown.setOptions) {
-            this.toDropdown = { setOptions() {} };
+            this.toDropdown = { setOptions() { } };
         }
 
         // Untuk debounce
@@ -119,6 +122,19 @@ class Translator {
             if (this.inputText) {
                 this.inputText.addEventListener('input', () => {
                     this.autoTranslate();
+                });
+            }
+
+            // Text-to-Speech Listeners
+            if (this.listenInputBtn) {
+                this.listenInputBtn.addEventListener('click', () => {
+                    this.speakText(this.inputText ? this.inputText.value : '', this.fromLang);
+                });
+            }
+
+            if (this.listenOutputBtn) {
+                this.listenOutputBtn.addEventListener('click', () => {
+                    this.speakText(this.outputText ? this.outputText.value : '', this.toLang);
                 });
             }
 
@@ -154,11 +170,11 @@ class Translator {
         try {
             console.log('Loading languages...');
             const response = await fetch(`${this.baseUrl}/languages`);
-            
+
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
-            
+
             const languages = await response.json();
             console.log('Languages loaded:', languages);
 
@@ -166,7 +182,7 @@ class Translator {
             if (this.fromDropdown.setOptions) {
                 this.fromDropdown.setOptions(languages, 'id');
             }
-            
+
             if (this.toDropdown.setOptions) {
                 this.toDropdown.setOptions(languages, 'en');
             }
@@ -174,7 +190,7 @@ class Translator {
             // ensure internal state
             this.fromLang = 'id';
             this.toLang = 'en';
-            
+
             console.log('Languages set successfully');
         } catch (error) {
             console.error('Failed to load languages:', error);
@@ -201,7 +217,7 @@ class Translator {
         if (this.fromDropdown.setOptions) {
             this.fromDropdown.setOptions(languages, 'id');
         }
-        
+
         if (this.toDropdown.setOptions) {
             this.toDropdown.setOptions(languages, 'en');
         }
@@ -228,11 +244,13 @@ class Translator {
                 this.outputText.value = '';
             }
             this.hideTranslationStatus();
+            this.toggleListenButtons();
             return;
         }
 
         // Tampilkan status "Menerjemahkan..."
         this.showTranslationStatus();
+        this.toggleListenButtons();
 
         // Set timeout untuk debounce
         this.translateTimeout = setTimeout(() => {
@@ -246,7 +264,7 @@ class Translator {
             this.translationStatus.classList.remove('hidden');
             // Check if using new progress bar style (has child elements) or old style
             if (!this.translationStatus.firstElementChild) {
-                 this.translationStatus.innerHTML = '<div class="text-center text-sm text-gray-400 py-2"><i class="fas fa-spinner fa-spin mr-2"></i>Menerjemahkan...</div>';
+                this.translationStatus.innerHTML = '<div class="text-center text-sm text-gray-400 py-2"><i class="fas fa-spinner fa-spin mr-2"></i>Menerjemahkan...</div>';
             }
         }
     }
@@ -272,7 +290,7 @@ class Translator {
             this.hideTranslationStatus();
             return;
         }
-        
+
         if (!text) {
             if (this.outputText) {
                 this.outputText.value = '';
@@ -285,7 +303,7 @@ class Translator {
 
         try {
             console.log('Translating:', { text, sourceLang, targetLang });
-            
+
             const response = await fetch(`${this.baseUrl}/translate`, {
                 method: 'POST',
                 headers: {
@@ -307,7 +325,7 @@ class Translator {
 
             // Proses respons
             let translatedText = '';
-            
+
             if (data.translatedText) {
                 translatedText = data.translatedText;
             } else if (Array.isArray(data) && data[0] && data[0].translatedText) {
@@ -327,7 +345,8 @@ class Translator {
 
             // Sembunyikan status
             this.hideTranslationStatus();
-            
+            this.toggleListenButtons();
+
             // Tampilkan notifikasi sukses
             setTimeout(() => {
                 this.showNotification('Terjemahan berhasil', 'success');
@@ -335,12 +354,12 @@ class Translator {
 
         } catch (error) {
             console.error('Translation error:', error);
-            
+
             // Set error message in output
             if (this.outputText) {
                 this.outputText.value = '❌ Gagal menerjemahkan. Periksa koneksi server.';
             }
-            
+
             this.hideTranslationStatus();
             this.showNotification('Gagal menerjemahkan: ' + error.message, 'error');
         } finally {
@@ -355,12 +374,13 @@ class Translator {
         // swap text areas
         if (this.inputText && this.outputText) {
             [this.inputText.value, this.outputText.value] = [this.outputText.value, this.inputText.value];
+            this.toggleListenButtons();
         }
 
         // swap labels/buttons (Updated for text spans)
         const fromBtn = document.getElementById('fromBtn');
         const toBtn = document.getElementById('toBtn');
-        
+
         if (fromBtn && toBtn) {
             const fromSpan = fromBtn.querySelector('span.truncate') || fromBtn;
             const toSpan = toBtn.querySelector('span.truncate') || toBtn;
@@ -377,6 +397,58 @@ class Translator {
         }
     }
 
+    // Fungsi untuk text-to-speech
+    speakText = (text, lang) => {
+        if (!text || !text.trim()) {
+            this.showNotification('Tidak ada teks untuk dibaca', 'warning');
+            return;
+        }
+
+        // Pastikan Web Speech API didukung
+        if (!('speechSynthesis' in window)) {
+            this.showNotification('Browser Anda tidak mendukung fitur suara', 'error');
+            return;
+        }
+
+        // Hentikan suara yang sedang berjalan sebelumnya
+        window.speechSynthesis.cancel();
+
+        const utterance = new SpeechSynthesisUtterance(text);
+
+        // Web Speech API menggunakan format seperti 'en-US' atau setidaknya 'en'
+        // Beberapa browser mungkin butuh format spesifik, tapi kode 2 huruf biasanya berjalan baik (fallback otomatis)
+        utterance.lang = lang;
+        utterance.rate = 0.9; // Sedikit lebih lambat agar jelas
+
+        utterance.onerror = (e) => {
+            console.error('SpeechSynthesis error:', e);
+            if (e.error !== 'interrupted' && e.error !== 'canceled') {
+                this.showNotification('Suara tidak tersedia untuk bahasa ini atau terjadi kesalahan.', 'warning');
+            }
+        };
+
+        window.speechSynthesis.speak(utterance);
+    }
+
+    // Fungsi untuk menyembunyikan/menampilkan tombol speaker
+    toggleListenButtons = () => {
+        if (this.listenInputBtn && this.inputText) {
+            if (this.inputText.value.trim().length > 0) {
+                this.listenInputBtn.classList.remove('hidden');
+            } else {
+                this.listenInputBtn.classList.add('hidden');
+            }
+        }
+
+        if (this.listenOutputBtn && this.outputText) {
+            if (this.outputText.value.trim().length > 0) {
+                this.listenOutputBtn.classList.remove('hidden');
+            } else {
+                this.listenOutputBtn.classList.add('hidden');
+            }
+        }
+    }
+
     // Fungsi untuk menampilkan notifikasi
     showNotification = (message, type = 'info') => {
         // Hapus notifikasi sebelumnya jika ada
@@ -384,14 +456,14 @@ class Translator {
         if (existingNotif) {
             existingNotif.remove();
         }
-        
+
         const notification = document.createElement('div');
-        
+
         let icon = 'info-circle';
         let bgColor = 'bg-blue-100';
         let textColor = 'text-blue-800';
         let borderColor = 'border-blue-300';
-        
+
         if (type === 'error') {
             icon = 'exclamation-circle';
             bgColor = 'bg-red-100';
@@ -408,7 +480,7 @@ class Translator {
             textColor = 'text-green-800';
             borderColor = 'border-green-300';
         }
-        
+
         notification.className = `notification-translify fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${bgColor} ${textColor} ${borderColor} border`;
         notification.style.maxWidth = '400px';
 
@@ -436,7 +508,7 @@ class Translator {
 // Tunggu DOM siap sepenuhnya
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded, initializing Translator...');
-    
+
     // Tambah delay kecil untuk memastikan semua elemen tersedia
     setTimeout(() => {
         try {
