@@ -250,21 +250,6 @@ section.w-full.bg-\[\#1B3BB2\] {
     right: 50% !important;
 }
 
-/* Video Container */
-.aspect-video {
-    aspect-ratio: 16 / 9;
-}
-
-/* Play Button Animation */
-.hover\:scale-110:hover {
-    transform: scale(1.1);
-}
-
-/* Smooth Transitions */
-.group:hover .group-hover\:translate-x-1 {
-    transform: translateX(0.25rem);
-}
-
 .transition-transform {
     transition-property: transform;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -279,44 +264,4 @@ section.w-full.bg-\[\#1B3BB2\] {
 
 .kamus {
     margin-top: -1px;
-}
-
-/* Linear Mask for Brand Slider */
-.mask-linear-fade {
-    mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-
-/* Translation Progress Animation */
-@keyframes progress {
-    0% {
-        transform: scaleX(0);
-    }
-
-    50% {
-        transform: scaleX(0.5);
-    }
-
-    100% {
-        transform: scaleX(1);
-    }
-}
-
-.animate-progress {
-    width: 100%;
-    height: 100%;
-    animation: progress 1.5s ease-in-out infinite;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-.scrollbar-hide::-webkit-scrollbar {
-    display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.scrollbar-hide {
-    -ms-overflow-style: none;
-    /* IE and Edge */
-    scrollbar-width: none;
-    /* Firefox */
 }
