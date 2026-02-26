@@ -30,15 +30,34 @@
                     </a>
                 </div>
                 <ul class="flex items-center space-x-4 md:space-x-5">
-                    <li class="hidden sm:block">
-                        <a href="#" class="block p-2 hover:bg-gray-100 rounded-full transition-colors" title="Settings">
+                    <li class="relative" id="settingsContainer">
+                        <button id="settingsBtn"
+                            class="p-2 hover:bg-gray-100 rounded-full transition-colors flex items-center justify-center focus:outline-none"
+                            title="Pengaturan">
                             <img src="/asset/icons8-settings-64.png" alt="settings" class="w-6 h-6 md:w-7 md:h-7">
-                        </a>
-                    </li>
-                    <li class="sm:hidden">
-                        <button class="p-2 hover:bg-gray-100 rounded-full">
-                            <i class="fas fa-bars text-xl"></i>
                         </button>
+                        <!-- Dropdown Settings -->
+                        <div id="settingsDropdown"
+                            class="hidden absolute right-0 mt-2 w-64 bg-white rounded-xl shadow-lg border border-gray-200 z-50 p-4">
+                            <h3 class="text-sm font-semibold text-gray-800 mb-3 border-b border-gray-100 pb-2">
+                                Pengaturan Suara</h3>
+                            <div class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-gray-500 mb-1.5">Kecepatan
+                                        Membaca</label>
+                                    <select id="voiceSpeedSelect"
+                                        class="w-full text-sm border-gray-200 rounded-lg focus:ring-blue-500 focus:border-blue-500 p-2 border outline-none bg-gray-50 text-gray-700 cursor-pointer">
+                                        <option value="1">Normal</option>
+                                        <option value="0.75">Lambat</option>
+                                        <option value="0.5">Lebih Lambat</option>
+                                    </select>
+                                </div>
+                                <button id="testVoiceBtn"
+                                    class="w-full py-2 bg-blue-50 text-blue-600 border border-blue-100 rounded-lg text-sm font-medium hover:bg-blue-100 transition-colors flex items-center justify-center gap-2">
+                                    <i class="fas fa-volume-up"></i> Uji Kecepatan
+                                </button>
+                            </div>
+                        </div>
                     </li>
                     <li>
                         <a href="#"
@@ -55,92 +74,219 @@
     <!-- main content -->
     <main class="px-4 sm:px-6 md:px-8 lg:px-12 xl:px-24 py-8 border-t border-gray-200 min-h-screen">
         <section class="max-w-7xl mx-auto">
+            <!-- Header Container (Buttons) -->
+            <section class="flex flex-wrap gap-2 md:gap-3 mb-4 md:mb-6">
+                <!-- Button untuk menerjemahkan bahasa -->
+                <button id="textModeBtn"
+                    class="flex items-center gap-3 px-4 py-2 border border-[#1a73e8] rounded-lg bg-blue-50 transition-colors">
+                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        class="w-6 h-6 fill-[#1a73e8] shrink-0">
+                        <path
+                            d="M12.87 15.07l-2.54-2.51.03-.03A17.52 17.52 0 0 0 14.07 6H17V4h-7V2H8v2H1v2h11.17C11.5 7.92 10.44 9.75 9 11.35 8.07 10.32 7.3 9.19 6.69 8h-2c.73 1.63 1.73 3.17 2.98 4.56l-5.09 5.02L4 19l5-5 3.11 3.11.76-2.04zM18.5 10h-2L12 22h2l1.12-3h4.75L21 22h2l-4.5-12zm-2.62 7l1.62-4.33L19.12 17h-3.24z">
+                        </path>
+                    </svg>
+                    <div class="text-left leading-tight">
+                        <div class="text-[#1a73e8] font-medium text-[15px] btn-title">Menerjemahkan teks</div>
+                        <div class="text-[#1a73e8] opacity-80 text-[13px] mt-0.5 btn-subtitle">Lebih dari 100 bahasa
+                        </div>
+                    </div>
+                </button>
+
+                <!-- Button untuk menerjemahakan dokumen -->
+                <button id="docModeBtn"
+                    class="flex items-center gap-3 px-4 py-2 border border-gray-200 rounded-lg bg-white hover:bg-gray-50 transition-colors">
+                    <svg focusable="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
+                        class="w-6 h-6 fill-gray-600 shrink-0">
+                        <path
+                            d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2h12c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6zm2-8h8v2H8v-2zm0 4h5v2H8v-2z">
+                        </path>
+                    </svg>
+                    <div class="text-left leading-tight">
+                        <div class="text-gray-700 font-medium text-[15px] btn-title">Menerjemahkan berkas</div>
+                        <div class="text-gray-500 text-[13px] mt-0.5 btn-subtitle">.pdf, .docx, .pptx</div>
+                    </div>
+                </button>
+            </section>
+
             <!-- Translation Container -->
             <div class="bg-white shadow-lg border border-gray-200">
-                <!-- Language Selection Box -->
-                <div class="border border-gray-200 p-3 md:p-4">
-                    <div class="flex items-center justify-center space-x-4">
-                        <!-- From Language (custom) -->
-                        <div class="relative">
-                            <div class="relative w-28 md:w-32">
-                                <button id="fromBtn" type="button"
-                                    class="dropdown-btn p-2 rounded-lg bg-white hover:bg-gray-100 transition-colors text-sm flex items-center justify-center gap-2">
-                                    <span class="truncate">Indonesia</span>
-                                    <i class="fas fa-chevron-down text-gray-400 text-[10px] shrink-0"></i>
+                <div id="textTranslationArea">
+                    <!-- Language Selection Box -->
+                    <div class="border border-gray-200 p-3 md:p-4">
+                        <div class="flex items-center justify-center space-x-4">
+                            <!-- From Language (custom) -->
+                            <div class="relative">
+                                <div class="relative w-28 md:w-32">
+                                    <button id="fromBtn" type="button"
+                                        class="dropdown-btn p-2 rounded-lg bg-white hover:bg-gray-100 transition-colors text-sm flex items-center justify-center gap-2">
+                                        <span class="truncate">Indonesia</span>
+                                        <i class="fas fa-chevron-down text-gray-400 text-[10px] shrink-0"></i>
+                                    </button>
+                                    <ul id="fromList"
+                                        class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list">
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <!-- Swap Button -->
+                            <div class="flex items-center justify-center">
+                                <button id="swapBtn"
+                                    class="p-2 hover:bg-gray-50 rounded-full transition-colors bg-white"
+                                    title="Tukar bahasa">
+                                    <i class="fas fa-exchange-alt text-gray-700"></i>
                                 </button>
-                                <ul id="fromList"
-                                    class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list">
-                                </ul>
+                            </div>
+
+                            <!-- To Language (custom) -->
+                            <div class="relative">
+                                <div class="relative w-28 md:w-32">
+                                    <button id="toBtn" type="button"
+                                        class="dropdown-btn p-2 rounded-lg bg-white hover:bg-gray-100 transition-colors text-sm flex items-center justify-center gap-2">
+                                        <span class="truncate">English</span>
+                                        <i class="fas fa-chevron-down text-gray-400 text-[10px] shrink-0"></i>
+                                    </button>
+                                    <ul id="toList"
+                                        class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list">
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Text Areas Row -->
+                    <div class="flex flex-col md:flex-row">
+                        <!-- Input Text Area -->
+                        <div class="flex-1 border border-gray-200 bg-white flex flex-col h-80 md:h-[26rem]">
+                            <textarea id="input-text"
+                                class="w-full flex-1 p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
+                                placeholder="Ketik teks di sini..."></textarea>
+                            <div class="px-3 pb-3 flex justify-start items-center">
+                                <button id="micInputBtn"
+                                    class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 transition-colors"
+                                    title="Gunakan mikrofon">
+                                    <i class="fas fa-microphone text-lg"></i>
+                                </button>
+                                <button id="listenInputBtn"
+                                    class="hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 transition-colors"
+                                    title="Dengarkan terjemahan asal">
+                                    <i class="fas fa-volume-up text-lg"></i>
+                                </button>
+                                <button id="copyInputBtn"
+                                    class="hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 transition-colors"
+                                    title="Salin teks">
+                                    <i class="fas fa-copy text-lg"></i>
+                                </button>
                             </div>
                         </div>
 
-                        <!-- Swap Button -->
-                        <div class="flex items-center justify-center">
-                            <button id="swapBtn" class="p-2 hover:bg-gray-50 rounded-full transition-colors bg-white"
-                                title="Tukar bahasa">
-                                <i class="fas fa-exchange-alt text-gray-700"></i>
-                            </button>
+                        <!-- Output Text Area -->
+                        <div class="flex-1 border border-gray-200 bg-gray-50 flex flex-col h-80 md:h-[26rem]">
+                            <textarea id="output-text"
+                                class="w-full flex-1 p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0 bg-transparent"
+                                readonly></textarea>
+                            <div class="px-3 pb-3 flex justify-start items-center">
+                                <button id="listenOutputBtn"
+                                    class="hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 text-gray-500 transition-colors"
+                                    title="Dengarkan hasil terjemahan">
+                                    <i class="fas fa-volume-up text-lg"></i>
+                                </button>
+                                <button id="copyOutputBtn"
+                                    class="hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 text-gray-500 transition-colors"
+                                    title="Salin teks">
+                                    <i class="fas fa-copy text-lg"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div> <!-- End of textTranslationArea -->
+
+                    <!-- DOCUMENT TRANSLATION AREA -->
+                    <div id="docTranslationArea" class="hidden flex flex-col h-full bg-gray-50">
+                        <!-- Language Selection Box (Document) -->
+                        <div class="border-b border-gray-200 p-3 md:p-4 bg-white">
+                            <div class="flex items-center justify-center space-x-4">
+                                <!-- From Language (Doc) -->
+                                <div class="relative">
+                                    <div class="relative w-28 md:w-32">
+                                        <button id="docFromBtn" type="button"
+                                            class="dropdown-btn p-2 rounded-lg bg-white hover:bg-gray-100 transition-colors text-sm flex items-center justify-center gap-2">
+                                            <span class="truncate">Indonesia</span>
+                                            <i class="fas fa-chevron-down text-gray-400 text-[10px] shrink-0"></i>
+                                        </button>
+                                        <ul id="docFromList"
+                                            class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list">
+                                        </ul>
+                                    </div>
+                                </div>
+
+                                <!-- Arrow -->
+                                <div class="flex items-center justify-center">
+                                    <i class="fas fa-arrow-right text-gray-400 mx-2"></i>
+                                </div>
+
+                                <!-- To Language (Doc) -->
+                                <div class="relative">
+                                    <div class="relative w-28 md:w-32">
+                                        <button id="docToBtn" type="button"
+                                            class="dropdown-btn p-2 rounded-lg bg-white hover:bg-gray-100 transition-colors text-sm flex items-center justify-center gap-2">
+                                            <span class="truncate">English</span>
+                                            <i class="fas fa-chevron-down text-gray-400 text-[10px] shrink-0"></i>
+                                        </button>
+                                        <ul id="docToList"
+                                            class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- To Language (custom) -->
-                        <div class="relative">
-                            <div class="relative w-28 md:w-32">
-                                <button id="toBtn" type="button"
-                                    class="dropdown-btn p-2 rounded-lg bg-white hover:bg-gray-100 transition-colors text-sm flex items-center justify-center gap-2">
-                                    <span class="truncate">English</span>
-                                    <i class="fas fa-chevron-down text-gray-400 text-[10px] shrink-0"></i>
-                                </button>
-                                <ul id="toList"
-                                    class="hidden absolute z-20 mt-1 w-full bg-white border rounded-lg shadow max-h-48 overflow-y-auto text-sm custom-list">
-                                </ul>
+                        <!-- Upload Zone -->
+                        <div class="flex-1 flex flex-col items-center justify-center p-8 md:p-16 min-h-[26rem]">
+                            <input type="file" id="documentUploadInput" class="hidden" accept=".pdf,.docx,.pptx,.txt">
+
+                            <!-- Upload Prompt -->
+                            <label for="documentUploadInput" id="uploadPrompt"
+                                class="flex flex-col items-center cursor-pointer hover:opacity-80 transition-opacity text-center w-full max-w-2xl border-2 border-dashed border-gray-300 rounded-xl bg-white py-12 px-6">
+                                <div
+                                    class="w-16 h-16 bg-blue-50 text-[#1a73e8] rounded-full flex items-center justify-center mb-4 shadow-sm">
+                                    <i class="fas fa-cloud-upload-alt text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-medium text-gray-800 mb-2">Pilih dokumen</h3>
+                                <p class="text-sm text-gray-500">Atau seret dan lepas ke sini</p>
+                                <p class="text-xs text-gray-400 mt-3">Dukungan format: .pdf, .docx, .pptx, .txt (Max
+                                    5MB)
+                                </p>
+                                <div
+                                    class="mt-6 px-6 py-2.5 bg-white border border-gray-300 rounded-lg text-sm text-[#1a73e8] font-medium shadow-sm hover:bg-gray-50 transition-colors">
+                                    Telusuri file komputer Anda</div>
+                            </label>
+
+                            <!-- Uploaded File State -->
+                            <div id="fileUploadState"
+                                class="hidden flex-col items-center justify-center w-full max-w-2xl border border-gray-200 rounded-xl bg-white py-12 px-6 shadow-sm">
+                                <i class="fas fa-file-alt text-5xl text-[#1a73e8] mb-4"></i>
+                                <span id="fileName"
+                                    class="text-gray-800 font-medium text-lg truncate max-w-xs md:max-w-md mb-6">dokumen.pdf</span>
+
+                                <div class="flex gap-4">
+                                    <button id="cancelUploadBtn"
+                                        class="px-6 py-2 border border-gray-300 text-sm text-gray-700 font-medium rounded-lg hover:bg-gray-50 transition-colors">Batal</button>
+                                    <button id="translateDocBtn"
+                                        class="px-6 py-2 bg-[#1a73e8] text-sm text-white font-medium rounded-lg hover:bg-blue-700 transition-colors shadow-sm flex items-center gap-2">
+                                        <i class="fas fa-language"></i> Terjemahkan
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- Text Areas Row -->
-                <div class="flex flex-col md:flex-row">
-                    <!-- Input Text Area -->
-                    <div class="flex-1 border border-gray-200 bg-white flex flex-col h-80 md:h-[26rem]">
-                        <textarea id="input-text"
-                            class="w-full flex-1 p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0"
-                            placeholder="Ketik teks di sini..."></textarea>
-                        <div class="px-3 pb-3 flex justify-start items-center">
-                            <button id="micInputBtn"
-                                class="w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 transition-colors"
-                                title="Gunakan mikrofon">
-                                <i class="fas fa-microphone text-lg"></i>
-                            </button>
-                            <button id="listenInputBtn"
-                                class="hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-100 text-gray-500 transition-colors"
-                                title="Dengarkan terjemahan asal">
-                                <i class="fas fa-volume-up text-lg"></i>
-                            </button>
-                        </div>
-                    </div>
 
-                    <!-- Output Text Area -->
-                    <div class="flex-1 border border-gray-200 bg-gray-50 flex flex-col h-80 md:h-[26rem]">
-                        <textarea id="output-text"
-                            class="w-full flex-1 p-4 focus:outline-none focus:ring-0 resize-none text-lg border-0 bg-transparent"
-                            readonly></textarea>
-                        <div class="px-3 pb-3 flex justify-start items-center">
-                            <button id="listenOutputBtn"
-                                class="hidden w-10 h-10 flex items-center justify-center rounded-full hover:bg-gray-200 text-gray-500 transition-colors"
-                                title="Dengarkan hasil terjemahan">
-                                <i class="fas fa-volume-up text-lg"></i>
-                            </button>
-                        </div>
+                </div>
+
+                <!-- Translate Button -->
+                <div class="flex justify-center">
+                    <div id="translationStatus" class="text-gray-500 text-sm hidden">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>Menerjemahkan...</span>
                     </div>
                 </div>
-            </div>
-
-            <!-- Translate Button -->
-            <div class="flex justify-center">
-                <div id="translationStatus" class="text-gray-500 text-sm hidden">
-                    <i class="fas fa-spinner fa-spin"></i>
-                    <span>Menerjemahkan...</span>
-                </div>
-            </div>
         </section>
 
         <!-- kamus -->

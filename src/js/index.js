@@ -77,9 +77,33 @@ class Translator {
         this.listenInputBtn = document.getElementById('listenInputBtn');
         this.listenOutputBtn = document.getElementById('listenOutputBtn');
         this.micInputBtn = document.getElementById('micInputBtn');
+        this.copyInputBtn = document.getElementById('copyInputBtn');
+        this.copyOutputBtn = document.getElementById('copyOutputBtn');
 
         this.recognition = null;
         this.isRecording = false;
+
+        // Mode Switching Elements
+        this.textModeBtn = document.getElementById('textModeBtn');
+        this.docModeBtn = document.getElementById('docModeBtn');
+        this.textTranslationArea = document.getElementById('textTranslationArea');
+        this.docTranslationArea = document.getElementById('docTranslationArea');
+
+        // Document Translation Elements
+        this.documentUploadInput = document.getElementById('documentUploadInput');
+        this.fileUploadState = document.getElementById('fileUploadState');
+        this.fileName = document.getElementById('fileName');
+        this.cancelUploadBtn = document.getElementById('cancelUploadBtn');
+        this.translateDocBtn = document.getElementById('translateDocBtn');
+        this.selectedFile = null;
+
+        // Settings Elements
+        this.settingsBtn = document.getElementById('settingsBtn');
+        this.settingsDropdown = document.getElementById('settingsDropdown');
+        this.voiceSpeedSelect = document.getElementById('voiceSpeedSelect');
+        this.testVoiceBtn = document.getElementById('testVoiceBtn');
+
+        this.voiceRate = this.voiceSpeedSelect ? (parseFloat(this.voiceSpeedSelect.value) || 1.0) : 1.0;
 
         // state bahasa
         this.fromLang = 'id';
@@ -104,6 +128,25 @@ class Translator {
             this.toDropdown = { setOptions() { } };
         }
 
+        // Init document dropdowns
+        this.docFromDropdown = initCustomDropdown('docFromBtn', 'docFromList', (code) => {
+            this.docFromLang = code;
+        });
+
+        this.docToDropdown = initCustomDropdown('docToBtn', 'docToList', (code) => {
+            this.docToLang = code;
+        });
+
+        if (!this.docFromDropdown || !this.docFromDropdown.setOptions) {
+            this.docFromDropdown = { setOptions() { } };
+        }
+        if (!this.docToDropdown || !this.docToDropdown.setOptions) {
+            this.docToDropdown = { setOptions() { } };
+        }
+
+        this.docFromLang = 'id';
+        this.docToLang = 'en';
+
         // Untuk debounce
         this.translateTimeout = null;
         this.debounceDelay = 800; // Delay untuk auto-translate
@@ -113,37 +156,92 @@ class Translator {
     }
 
     init = async () => {
+        // Event listeners
+        if (this.swapButton) {
+            this.swapButton.addEventListener('click', () => this.swapLanguages());
+        }
+
+        // Auto-translate on input (debounced)
+        if (this.inputText) {
+            this.inputText.addEventListener('input', () => {
+                this.autoTranslate();
+            });
+        }
+
+        // Speech Recognition
+        this.initSpeechRecognition();
+
+        // Text-to-Speech Listeners
+        if (this.listenInputBtn) {
+            this.listenInputBtn.addEventListener('click', () => {
+                this.speakText(this.inputText ? this.inputText.value : '', this.fromLang);
+            });
+        }
+
+        if (this.listenOutputBtn) {
+            this.listenOutputBtn.addEventListener('click', () => {
+                this.speakText(this.outputText ? this.outputText.value : '', this.toLang);
+            });
+        }
+
+        // Copy Text Listeners
+        if (this.copyInputBtn) {
+            this.copyInputBtn.addEventListener('click', () => {
+                this.copyText(this.inputText ? this.inputText.value : '');
+            });
+        }
+
+        if (this.copyOutputBtn) {
+            this.copyOutputBtn.addEventListener('click', () => {
+                this.copyText(this.outputText ? this.outputText.value : '');
+            });
+        }
+
+        // Settings Menu Listeners
+        if (this.settingsBtn && this.settingsDropdown) {
+            this.settingsBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.settingsDropdown.classList.toggle('hidden');
+            });
+
+            document.addEventListener('click', (e) => {
+                if (!this.settingsBtn.contains(e.target) && !this.settingsDropdown.contains(e.target)) {
+                    this.settingsDropdown.classList.add('hidden');
+                }
+            });
+        }
+
+        if (this.voiceSpeedSelect) {
+            this.voiceSpeedSelect.addEventListener('change', (e) => {
+                this.voiceRate = parseFloat(e.target.value);
+            });
+        }
+
+        if (this.testVoiceBtn) {
+            this.testVoiceBtn.addEventListener('click', () => {
+                this.speakText('Ini adalah contoh kecepatan suara dari pengaturan sistem.', 'id');
+            });
+        }
+
+        // Mode Switching
+        if (this.textModeBtn) {
+            this.textModeBtn.addEventListener('click', () => this.switchMode('text'));
+        }
+        if (this.docModeBtn) {
+            this.docModeBtn.addEventListener('click', () => this.switchMode('document'));
+        }
+
+        // Document Upload Listeners
+        if (this.documentUploadInput) {
+            this.documentUploadInput.addEventListener('change', (e) => this.handleFileUpload(e));
+        }
+        if (this.cancelUploadBtn) {
+            this.cancelUploadBtn.addEventListener('click', () => this.cancelFileUpload());
+        }
+
         try {
             // Load available languages
             await this.loadLanguages();
-
-            // Event listeners
-            if (this.swapButton) {
-                this.swapButton.addEventListener('click', () => this.swapLanguages());
-            }
-
-            // Auto-translate on input (debounced)
-            if (this.inputText) {
-                this.inputText.addEventListener('input', () => {
-                    this.autoTranslate();
-                });
-            }
-
-            // Speech Recognition
-            this.initSpeechRecognition();
-
-            // Text-to-Speech Listeners
-            if (this.listenInputBtn) {
-                this.listenInputBtn.addEventListener('click', () => {
-                    this.speakText(this.inputText ? this.inputText.value : '', this.fromLang);
-                });
-            }
-
-            if (this.listenOutputBtn) {
-                this.listenOutputBtn.addEventListener('click', () => {
-                    this.speakText(this.outputText ? this.outputText.value : '', this.toLang);
-                });
-            }
 
             // Check server health
             await this.checkHealth();
@@ -194,9 +292,19 @@ class Translator {
                 this.toDropdown.setOptions(languages, 'en');
             }
 
+            if (this.docFromDropdown.setOptions) {
+                this.docFromDropdown.setOptions(languages, 'id');
+            }
+
+            if (this.docToDropdown.setOptions) {
+                this.docToDropdown.setOptions(languages, 'en');
+            }
+
             // ensure internal state
             this.fromLang = 'id';
             this.toLang = 'en';
+            this.docFromLang = 'id';
+            this.docToLang = 'en';
 
             console.log('Languages set successfully');
         } catch (error) {
@@ -229,8 +337,18 @@ class Translator {
             this.toDropdown.setOptions(languages, 'en');
         }
 
+        if (this.docFromDropdown.setOptions) {
+            this.docFromDropdown.setOptions(languages, 'id');
+        }
+
+        if (this.docToDropdown.setOptions) {
+            this.docToDropdown.setOptions(languages, 'en');
+        }
+
         this.fromLang = 'id';
         this.toLang = 'en';
+        this.docFromLang = 'id';
+        this.docToLang = 'en';
     }
 
     // Fungsi baru untuk auto-translate dengan debounce
@@ -489,6 +607,122 @@ class Translator {
         }
     }
 
+    // Fungsi untuk mengubah mode Terjemahan
+    switchMode = (mode) => {
+        const setActive = (btn) => {
+            if (!btn) return;
+            btn.classList.add('border-[#1a73e8]', 'bg-blue-50');
+            btn.classList.remove('border-gray-200', 'bg-white', 'hover:bg-gray-50');
+
+            const icon = btn.querySelector('.svg-icon');
+            if (icon) {
+                icon.classList.add('fill-[#1a73e8]');
+                icon.classList.remove('fill-gray-600');
+            }
+
+            const title = btn.querySelector('.btn-title');
+            if (title) {
+                title.classList.add('text-[#1a73e8]');
+                title.classList.remove('text-gray-700');
+            }
+
+            const subtitle = btn.querySelector('.btn-subtitle');
+            if (subtitle) {
+                subtitle.classList.add('text-[#1a73e8]', 'opacity-80');
+                subtitle.classList.remove('text-gray-500');
+            }
+        };
+
+        const setInactive = (btn) => {
+            if (!btn) return;
+            btn.classList.remove('border-[#1a73e8]', 'bg-blue-50');
+            btn.classList.add('border-gray-200', 'bg-white', 'hover:bg-gray-50');
+
+            const icon = btn.querySelector('.svg-icon');
+            if (icon) {
+                icon.classList.remove('fill-[#1a73e8]');
+                icon.classList.add('fill-gray-600');
+            }
+
+            const title = btn.querySelector('.btn-title');
+            if (title) {
+                title.classList.remove('text-[#1a73e8]');
+                title.classList.add('text-gray-700');
+            }
+
+            const subtitle = btn.querySelector('.btn-subtitle');
+            if (subtitle) {
+                subtitle.classList.remove('text-[#1a73e8]', 'opacity-80');
+                subtitle.classList.add('text-gray-500');
+            }
+        };
+
+        if (mode === 'text') {
+            setActive(this.textModeBtn);
+            setInactive(this.docModeBtn);
+
+            if (this.textTranslationArea) this.textTranslationArea.classList.remove('hidden');
+            if (this.docTranslationArea) {
+                this.docTranslationArea.classList.add('hidden');
+                this.docTranslationArea.classList.remove('flex');
+            }
+        } else if (mode === 'document') {
+            setInactive(this.textModeBtn);
+            setActive(this.docModeBtn);
+
+            if (this.textTranslationArea) this.textTranslationArea.classList.add('hidden');
+            if (this.docTranslationArea) {
+                this.docTranslationArea.classList.remove('hidden');
+                this.docTranslationArea.classList.add('flex');
+            }
+        }
+    }
+
+    handleFileUpload = (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+
+        // Allow .txt, .pdf, .docx, .doc
+        const allowedExtensions = ['.txt', '.pdf', '.docx', '.doc'];
+        const fileNameStr = file.name.toLowerCase();
+        const ext = fileNameStr.substring(fileNameStr.lastIndexOf('.'));
+
+        if (!allowedExtensions.includes(ext)) {
+            this.showNotification('Format dokumen tidak didukung', 'error');
+            this.cancelFileUpload();
+            return;
+        }
+
+        // Limit size, misalnya 5MB
+        if (file.size > 5 * 1024 * 1024) {
+            this.showNotification('Ukuran dokumen terlalu besar (maks 5MB)', 'error');
+            this.cancelFileUpload();
+            return;
+        }
+
+        this.selectedFile = file;
+        if (this.fileName) {
+            this.fileName.textContent = file.name;
+            this.fileName.title = file.name;
+        }
+
+        if (this.fileUploadState) {
+            this.fileUploadState.classList.remove('hidden');
+            this.fileUploadState.classList.add('flex');
+        }
+    }
+
+    cancelFileUpload = () => {
+        this.selectedFile = null;
+        if (this.documentUploadInput) {
+            this.documentUploadInput.value = '';
+        }
+        if (this.fileUploadState) {
+            this.fileUploadState.classList.add('hidden');
+            this.fileUploadState.classList.remove('flex');
+        }
+    }
+
     // Fungsi untuk text-to-speech
     speakText = (text, lang) => {
         if (!text || !text.trim()) {
@@ -510,7 +744,7 @@ class Translator {
         // Web Speech API menggunakan format seperti 'en-US' atau setidaknya 'en'
         // Beberapa browser mungkin butuh format spesifik, tapi kode 2 huruf biasanya berjalan baik (fallback otomatis)
         utterance.lang = lang;
-        utterance.rate = 0.9; // Sedikit lebih lambat agar jelas
+        utterance.rate = this.voiceRate; // Menggunakan pengaturan kecepatan
 
         utterance.onerror = (e) => {
             console.error('SpeechSynthesis error:', e);
@@ -522,22 +756,42 @@ class Translator {
         window.speechSynthesis.speak(utterance);
     }
 
-    // Fungsi untuk menyembunyikan/menampilkan tombol speaker
-    toggleListenButtons = () => {
-        if (this.listenInputBtn && this.inputText) {
-            if (this.inputText.value.trim().length > 0) {
-                this.listenInputBtn.classList.remove('hidden');
-            } else {
-                this.listenInputBtn.classList.add('hidden');
-            }
+    // Fungsi untuk menyalin teks ke clipboard
+    copyText = async (text) => {
+        if (!text || !text.trim()) {
+            this.showNotification('Tidak ada teks untuk disalin', 'warning');
+            return;
         }
 
-        if (this.listenOutputBtn && this.outputText) {
-            if (this.outputText.value.trim().length > 0) {
-                this.listenOutputBtn.classList.remove('hidden');
-            } else {
-                this.listenOutputBtn.classList.add('hidden');
-            }
+        try {
+            await navigator.clipboard.writeText(text);
+            this.showNotification('Teks disalin ke clipboard', 'success');
+        } catch (err) {
+            console.error('Failed to copy text: ', err);
+            this.showNotification('Gagal menyalin teks', 'error');
+        }
+    }
+
+    // Fungsi untuk menyembunyikan/menampilkan tombol aksi (speaker, copy, dll)
+    toggleListenButtons = () => {
+        const hasInputText = this.inputText && this.inputText.value.trim().length > 0;
+        if (this.listenInputBtn) {
+            if (hasInputText) this.listenInputBtn.classList.remove('hidden');
+            else this.listenInputBtn.classList.add('hidden');
+        }
+        if (this.copyInputBtn) {
+            if (hasInputText) this.copyInputBtn.classList.remove('hidden');
+            else this.copyInputBtn.classList.add('hidden');
+        }
+
+        const hasOutputText = this.outputText && this.outputText.value.trim().length > 0;
+        if (this.listenOutputBtn) {
+            if (hasOutputText) this.listenOutputBtn.classList.remove('hidden');
+            else this.listenOutputBtn.classList.add('hidden');
+        }
+        if (this.copyOutputBtn) {
+            if (hasOutputText) this.copyOutputBtn.classList.remove('hidden');
+            else this.copyOutputBtn.classList.add('hidden');
         }
     }
 
