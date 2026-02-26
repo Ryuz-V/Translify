@@ -76,6 +76,10 @@ class Translator {
 
         this.listenInputBtn = document.getElementById('listenInputBtn');
         this.listenOutputBtn = document.getElementById('listenOutputBtn');
+        this.micInputBtn = document.getElementById('micInputBtn');
+
+        this.recognition = null;
+        this.isRecording = false;
 
         // state bahasa
         this.fromLang = 'id';
@@ -124,6 +128,9 @@ class Translator {
                     this.autoTranslate();
                 });
             }
+
+            // Speech Recognition
+            this.initSpeechRecognition();
 
             // Text-to-Speech Listeners
             if (this.listenInputBtn) {
@@ -364,6 +371,91 @@ class Translator {
             this.showNotification('Gagal menerjemahkan: ' + error.message, 'error');
         } finally {
             this.isTranslating = false;
+        }
+    }
+
+    initSpeechRecognition = () => {
+        if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+            if (this.micInputBtn) {
+                this.micInputBtn.style.display = 'none';
+            }
+            return;
+        }
+
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        this.recognition = new SpeechRecognition();
+        this.recognition.continuous = false;
+        this.recognition.interimResults = true;
+
+        let originalText = '';
+
+        this.recognition.onstart = () => {
+            this.isRecording = true;
+            if (this.inputText) {
+                originalText = this.inputText.value;
+            }
+            if (this.micInputBtn) {
+                this.micInputBtn.classList.add('text-red-500', 'bg-red-50');
+                this.micInputBtn.classList.remove('text-gray-500', 'hover:bg-gray-100');
+                const icon = this.micInputBtn.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-microphone');
+                    icon.classList.add('fa-microphone-slash');
+                }
+            }
+        };
+
+        this.recognition.onresult = (event) => {
+            let currentTranscript = '';
+            for (let i = event.resultIndex; i < event.results.length; ++i) {
+                currentTranscript += event.results[i][0].transcript;
+            }
+            if (this.inputText) {
+                const space = originalText && !originalText.endsWith(' ') && currentTranscript ? ' ' : '';
+                this.inputText.value = originalText + space + currentTranscript;
+                this.autoTranslate();
+            }
+        };
+
+        this.recognition.onerror = (event) => {
+            console.error('Speech recognition error', event.error);
+            this.isRecording = false;
+            this.resetMicButton();
+            if (event.error !== 'no-speech') {
+                this.showNotification('Gagal menggunakan mikrofon', 'error');
+            }
+        };
+
+        this.recognition.onend = () => {
+            this.isRecording = false;
+            this.resetMicButton();
+        };
+
+        if (this.micInputBtn) {
+            this.micInputBtn.addEventListener('click', () => {
+                if (this.isRecording) {
+                    this.recognition.stop();
+                } else {
+                    try {
+                        this.recognition.lang = this.fromLang;
+                        this.recognition.start();
+                    } catch (e) {
+                        console.error('Error starting speech recognition:', e);
+                    }
+                }
+            });
+        }
+    }
+
+    resetMicButton = () => {
+        if (this.micInputBtn) {
+            this.micInputBtn.classList.remove('text-red-500', 'bg-red-50');
+            this.micInputBtn.classList.add('text-gray-500', 'hover:bg-gray-100');
+            const icon = this.micInputBtn.querySelector('i');
+            if (icon) {
+                icon.classList.remove('fa-microphone-slash');
+                icon.classList.add('fa-microphone');
+            }
         }
     }
 
