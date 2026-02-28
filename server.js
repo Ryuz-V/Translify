@@ -53,7 +53,7 @@ app.get('/', (req, res) => {
                 path.join(__dirname, 'src', 'index.html'),
                 path.join(process.cwd(), 'index.html')
             ];
-            
+
             let found = false;
             for (const p of possiblePaths) {
                 if (fs.existsSync(p)) {
@@ -63,7 +63,7 @@ app.get('/', (req, res) => {
                     break;
                 }
             }
-            
+
             if (!found) {
                 res.status(404).send(`
                     <h1>File index.html tidak ditemukan</h1>
@@ -109,9 +109,9 @@ app.post('/api/translate', async (req, res) => {
         res.json(response.data);
     } catch (error) {
         console.error('Translation error:', error.message);
-        res.status(500).json({ 
-            error: 'Translation failed', 
-            details: error.message 
+        res.status(500).json({
+            error: 'Translation failed',
+            details: error.message
         });
     }
 });
@@ -136,6 +136,64 @@ app.get('/api/languages', async (req, res) => {
             { code: 'ar', name: 'Arabic' },
             { code: 'ru', name: 'Russian' }
         ]);
+    }
+});
+
+const multer = require('multer');
+const FormData = require('form-data');
+const upload = multer({ storage: multer.memoryStorage() });
+
+// Endpoint untuk translate file
+app.post('/api/translate-file', upload.single('file'), async (req, res) => {
+    try {
+        const { source_lang = 'id', target_lang = 'en' } = req.body;
+        const file = req.file;
+
+        if (!file) {
+            return res.status(400).json({ error: 'File is required' });
+        }
+
+        const formData = new FormData();
+        formData.append('file', file.buffer, file.originalname);
+        formData.append('source', source_lang);
+        formData.append('target', target_lang);
+        if (process.env.LIBRETRANSLATE_API_KEY) {
+            formData.append('api_key', process.env.LIBRETRANSLATE_API_KEY);
+        }
+
+        const response = await axios.post(`${LIBRETRANSLATE_URL}/translate_file`, formData, {
+            headers: {
+                ...formData.getHeaders()
+            }
+        });
+
+        if (response.data && response.data.translatedFileUrl) {
+            // LibreTranslate returns a JSON with translatedFileUrl
+            // We need to fetch this file and forward it to the client
+            const fileUrl = response.data.translatedFileUrl;
+
+            // Perbaiki URL jika LibreTranslate mengembalikan localhost tetapi diakses dari luar
+            // (Opsional, asumsikan LibreTranslate dan backend berjalan di tempat yang sama)
+
+            const fileResponse = await axios.get(fileUrl, {
+                responseType: 'stream'
+            });
+
+            // Forward headers yang sesuai
+            res.setHeader('Content-Type', fileResponse.headers['content-type'] || 'application/octet-stream');
+            res.setHeader('Content-Disposition', `attachment; filename="translated_${file.originalname}"`);
+
+            // Forward respose ke client
+            fileResponse.data.pipe(res);
+        } else {
+            res.status(500).json({ error: 'Invalid response from LibreTranslate' });
+        }
+    } catch (error) {
+        console.error('File translation error:', error.message);
+        res.status(500).json({
+            error: 'File translation failed',
+            details: error.message
+        });
     }
 });
 

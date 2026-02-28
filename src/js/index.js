@@ -238,6 +238,9 @@ class Translator {
         if (this.cancelUploadBtn) {
             this.cancelUploadBtn.addEventListener('click', () => this.cancelFileUpload());
         }
+        if (this.translateDocBtn) {
+            this.translateDocBtn.addEventListener('click', () => this.translateDocument());
+        }
 
         try {
             // Load available languages
@@ -489,6 +492,99 @@ class Translator {
             this.showNotification('Gagal menerjemahkan: ' + error.message, 'error');
         } finally {
             this.isTranslating = false;
+        }
+    }
+
+    translateDocument = async () => {
+        if (!this.selectedFile) {
+            this.showNotification('Pilih dokumen terlebih dahulu', 'warning');
+            return;
+        }
+
+        const sourceLang = this.docFromLang;
+        const targetLang = this.docToLang;
+
+        if (!sourceLang || !targetLang) {
+            this.showNotification('Pilih bahasa asal dan tujuan', 'warning');
+            return;
+        }
+
+        if (this.isTranslating) {
+            return;
+        }
+
+        this.isTranslating = true;
+
+        // Update UI
+        const originalText = this.translateDocBtn.innerHTML;
+        this.translateDocBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Menerjemahkan...';
+        this.translateDocBtn.disabled = true;
+        this.cancelUploadBtn.disabled = true;
+        this.showNotification('Sedang menerjemahkan dokumen...', 'info');
+
+        try {
+            const formData = new FormData();
+            formData.append('file', this.selectedFile);
+            formData.append('source_lang', sourceLang);
+            formData.append('target_lang', targetLang);
+
+            const response = await fetch(`${this.baseUrl}/translate-file`, {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                let errorMessage = `HTTP error! status: ${response.status}`;
+                try {
+                    const errData = await response.json();
+                    if (errData.error) errorMessage = errData.error;
+                } catch (e) {
+                    // Ignore JSON parse error if response is not JSON
+                }
+                throw new Error(errorMessage);
+            }
+
+            // Dapatkan file hasil terjemahan sebagai blob
+            const blob = await response.blob();
+
+            // Buat URL untuk blob
+            const url = window.URL.createObjectURL(blob);
+
+            // Ekstrak nama file asli dan ekstensi
+            const originalName = this.selectedFile.name;
+            const lastDotIndex = originalName.lastIndexOf('.');
+            const nameWithoutExt = lastDotIndex !== -1 ? originalName.substring(0, lastDotIndex) : originalName;
+            const ext = lastDotIndex !== -1 ? originalName.substring(lastDotIndex) : '';
+
+            // Nama file baru (misal: dokumen_id_en.pdf)
+            const newFileName = `${nameWithoutExt}_${sourceLang}_${targetLang}${ext}`;
+
+            // Buat element <a> sementara untuk mengunduh
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            a.download = newFileName;
+            document.body.appendChild(a);
+            a.click();
+
+            // Bersihkan
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+
+            this.showNotification('Dokumen berhasil diterjemahkan dan diunduh!', 'success');
+
+            // Reset state
+            this.cancelFileUpload();
+
+        } catch (error) {
+            console.error('Document translation error:', error);
+            this.showNotification('Gagal menerjemahkan dokumen: ' + error.message, 'error');
+        } finally {
+            this.isTranslating = false;
+            // Restore UI
+            this.translateDocBtn.innerHTML = originalText;
+            this.translateDocBtn.disabled = false;
+            this.cancelUploadBtn.disabled = false;
         }
     }
 
