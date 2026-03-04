@@ -1,0 +1,10 @@
+.vscode
+node_modules
+note.txt
+.env
+node_modules/
+.env
+output.css
+*.log
+.DS_Store
+.txt
