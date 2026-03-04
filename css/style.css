@@ -1,0 +1,76 @@
+body {
+    overflow-x: hidden;
+}
+
+.dropdown-btn {
+    width: 7rem;
+    max-width: 12rem;
+}
+
+@media (min-width: 768px) {
+    .dropdown-btn {
+        width: 8rem;
+    }
+}
+
+.truncate-ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.custom-list::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+}
+
+#translationStatus {
+    transition: opacity 0.3s ease;
+}
+
+#translationStatus.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.fa-spinner {
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.title {
+    margin-bottom: 20px;
+}
+
+.txt_title {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.content_kamus {
+    margin-top: 5px;
+}
+
+.main_content {
+    margin-top: 5px;
+    font-size: 16px;
+    color: #555;
+}
+
+.container_kamus {
+    padding: 20px;
+}
+
+
+.kamus {
+    margin-top: -1px;
+}
